@@ -1,0 +1,317 @@
+.desktop-1-child {
+  position: absolute;
+  top: 13.5px;
+  left: 214.5px;
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 918px;
+  height: 586px;
+}
+.login-child {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 440px;
+  height: 586px;
+  object-fit: cover;
+}
+.login1,
+.please-enter-your {
+  position: absolute;
+  display: inline-block;
+}
+.login1 {
+  top: 37px;
+  left: 488px;
+  font-size: 45px;
+  color: #3d5054;
+  width: 165px;
+  height: 46px;
+}
+.please-enter-your {
+  top: 90px;
+  left: 490px;
+  width: 382px;
+  height: 24px;
+  color:#3d5054;
+}
+.email{
+  font-family: "Inter";
+  font-size: 16px;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 16px 11px;
+  border: 1px solid black;
+  position: absolute;
+  top: 145px;
+  left: 490px;
+  width: 349.2px;
+  height: 49.21px;
+}
+.password-input {
+  top: 209.39px;
+  padding: 16px 11px;
+  font-family: "Inter";
+  font-size: 16px;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid black;
+  position: absolute;
+  left: 490px;
+  width: 349.2px;
+  height: 49.21px;
+}
+.login-button-child {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  border-radius: 10px;
+  background-color: #3d5054;
+  box-shadow: 0 15px 30px -10px rgba(70, 67, 67, 0.3);
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 351.2px;
+  height: 51.21px;
+}
+.login2 {
+  position: absolute;
+  top: 14.76px;
+  left: 131.71px;
+  font-size: 20px;
+  display: inline-block;
+  font-family: var(--font-inter);
+  color: white;
+  text-align: center;
+  width: 78.14px;
+  height: 19.69px;
+}
+.login-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 353.75px;
+  left: 490px;
+  width: 349.2px;
+  height: 49.21px;
+}
+.dont-have-an,
+.forget-password,
+.keep-me-logged {
+  position: absolute;
+  top: 414px;
+  left: 495px;
+  display: inline-block;
+  color: #3d5054;
+  width: 185px;
+  height: 16px;
+}
+.forget-password,
+.keep-me-logged {
+  top: 1.95px;
+  left: 3px;
+  width: 163.57px;
+  color: #3d5054;
+  height: 15.57px;
+}
+.forget-password {
+  text-decoration:solid;
+  top: 3px;
+  left: 180px;
+  font-weight: 700;
+  color: #242c2e;
+  text-align: right;
+  width: 139.63px;
+}
+.dont-foget,
+.tick {
+  position: absolute;
+  height: 18.87px;
+}
+.tick {
+  cursor: pointer;
+  top: 0;
+  left: -23px;
+  width: 22.19px;
+}
+.dont-foget {
+  top: 274px;
+  left: 515px;
+  width: 347.63px;
+}
+.or-continue-with {
+  position: absolute;
+  top: 0;
+  color: #3d5054;
+  left: 109px;
+  display: inline-block;
+  width: 134px;
+  height: 16px;
+}
+.continue-child,
+.continue-item {
+  position: absolute;
+  border: 0.1px solid #3d5054;
+  top: 6.79px;
+  left: 10px;
+  width: 90px;
+  height: 1.32px;
+}
+.continue-item {
+  top: 6.79px;
+  left: 230px;
+  width: 90px;
+}
+.continue,
+.google-child {
+  position: absolute;
+  color: black;
+  top: 480px;
+  left: 495px;
+  width: 342.09px;
+  height: 16px;
+}
+.google-child {
+  top: -1px;
+  left: -1px;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 71.07px;
+  height: 49px;
+}
+.google-item {
+  position: absolute;
+  height: 50.39%;
+  width: 32.4%;
+  top: 19.38%;
+  right: 32.86%;
+  bottom: 30.23%;
+  left: 34.75%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.google {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 69.07px;
+  height: 50px;
+}
+.fackbook-item {
+  position: absolute;
+  height: 50.43%;
+  width: 32.4%;
+  top: 19.38%;
+  right: 34.28%;
+  bottom: 30.19%;
+  left: 33.32%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.fackbook {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 74.99px;
+  width: 69.07px;
+  height: 50px;
+}
+.apple-item {
+  position: absolute;
+  height: 50.39%;
+  width: 32.4%;
+  top: 18.78%;
+  right: 32.14%;
+  bottom: 30.83%;
+  left: 35.46%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.apple {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 150.96px;
+  width: 69.07px;
+  height: 50px;
+}
+.twitter-item {
+  position: absolute;
+  height: 50.39%;
+  width: 32.4%;
+  top: 19.38%;
+  right: 34.2%;
+  bottom: 30.23%;
+  left: 33.4%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.twitter {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  top: 0;
+  left: 227.93px;
+  width: 69.07px;
+  height: 50px;
+}
+.icons,
+.sign-up,
+.twitter {
+  position: absolute;
+}
+.icons {
+  top: 512px;
+  left: 513px;
+  width: 280px;
+  height: 40px;
+}
+.sign-up {
+  text-decoration: none;
+  top: 414px;
+  left: 650px;
+  font-weight: 700;
+  color: #242c2e;
+}
+.desktop-1,
+.login {
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+.login {
+  position: absolute;
+  top: 14px;
+  left: 240px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  width: 890px;
+  height: 585px;
+}
+.desktop-1 {
+  position: relative;
+  width: 100%;
+  height: 629px;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+  font-family: "Inter";
+}

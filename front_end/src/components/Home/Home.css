@@ -1,0 +1,358 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: url("../../assets/circle.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/*                                          Navbar component                                        */
+.top {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.navwidth {
+  width: 85%;
+}
+.menubar {
+  display: flex;
+  justify-content: space-between;
+}
+.logoimgbox {
+  width: 100px;
+  height: 100px;
+}
+.logo {
+  width: 100%;
+  height: 100%;
+}
+.bothlogo {
+  display: flex;
+}
+.name1 {
+  margin-top: 40px;
+  font-family: "Rubik Glitch";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
+}
+.navlinks {
+  margin-top: 40px;
+}
+.menuflex ul {
+  display: flex;
+  justify-content: space-between;
+}
+.menuflex li {
+  list-style: none;
+  margin-left: 30px;
+}
+.menuflex a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Outfit", sans-serif;
+}
+/*                                      Welcome Component                                           */
+.welcometop {
+  margin-bottom: 80px;
+}
+.welcomeflex {
+  display: flex;
+  justify-content: space-between;
+}
+.textwidth {
+  width: 38%;
+}
+.welcometext {
+  margin-top: 40px;
+  font-family: "Arima Madurai";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 55px;
+  line-height: 90px;
+}
+.curline {
+  position: absolute;
+  width: 1340px;
+  height: 275px;
+  margin-top: -270px;
+  transform: rotate(-180deg);
+}
+.curline img {
+  width: 100%;
+  height: 100%;
+}
+/*                                          About Component                                            */
+.faceimg {
+  height: 400px;
+}
+.faceimg img {
+  height: 100%;
+}
+.abouttext {
+  width: 50%;
+  margin-left: 30px;
+}
+.abouttext h3 {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 44px;
+  text-align: left;
+}
+.abouttext h1 {
+  margin: 20px 0px;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 44px;
+  line-height: 44px;
+  text-align: center;
+}
+.abouttext p {
+  font-family: "Arima Madurai";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: black;
+  margin-bottom: 30px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3d5054;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+/*                                      Gallery   Component                                              */
+.gallerytop {
+  display: flex;
+  justify-content: center;
+  margin: 60px 0px;
+}
+.gallerywidth {
+  width: 80%;
+}
+.gallerytext {
+  text-align: center;
+}
+.gallerytext h1 {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 46px;
+  line-height: 63px;
+  padding-bottom: 12px;
+}
+.gallerytext h3 {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 32px;
+}
+.salonsdata {
+  display: flex;
+  justify-content: center;
+  background-color: #96ad90;
+  height: 36vh;
+}
+.salongal {
+  display: flex;
+  justify-content: space-between;
+}
+.galimg {
+  width: 280px;
+  height: 250px;
+  margin: 50px 30px;
+}
+.galimg img {
+  width: 100%;
+  height: 100%;
+}
+.curlines {
+  position: absolute;
+  width: 1200px;
+  height: 275px;
+  margin-top: -130px;
+  transform: rotate(-180deg);
+}
+.curlines img {
+  width: 100%;
+  height: 100%;
+}
+.upbtn {
+  margin-top: 100px;
+}
+/*                                      testimonial component                                       */
+.testimonialtop {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.testwidth {
+  width: 80%;
+}
+.gallerytext p {
+  margin-top: 30px;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 28px;
+}
+.testrev {
+  text-align: center;
+  margin: auto;
+  width: 46%;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 47px;
+  line-height: 100%;
+}
+.reviewcenter {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+}
+.testflex {
+  width: 100%;
+}
+.reviewbox {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.revwidth {
+  width: 30%;
+  background-color: #98ad92;
+  padding: 20px;
+  border-radius: 26px;
+  height: 40vh;
+}
+.revimg {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+}
+.revimg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  margin-top: -6rem;
+}
+.reviewname {
+  margin: 6px 0px;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  margin-top: -5rem;
+}
+.revdesc {
+  text-align: center;
+  margin: 16px 0px;
+  color: white;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+.booked {
+  margin-top: 40px;
+  background-color: #96ad90;
+  padding: 26px 40px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+.booked h2 {
+  width: 56%;
+  margin-top: 10px;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 28px;
+  text-align: center;
+}
+.booked button {
+  border: none;
+  border-radius: 12px;
+  padding: 0px 20px;
+  font-family: "Playball";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 40px;
+  text-align: center;
+}
+/*                                          Footer Component                                            */
+.bgreen {
+  background-color: #98ad92;
+  border-top-left-radius: 26px;
+  border-bottom-left-radius: 26px;
+  padding: 30px 40px;
+}
+.footerhead {
+  margin-top: 50px;
+  margin-left: -100px;
+  font-family: "Rubik Glitch";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: 0.05em;
+}
+.quicklinks li {
+  list-style: none;
+  margin-top: 10px;
+}
+.quicklinks ul li a {
+  text-decoration: none;
+  color: black;
+  margin-left: 12px;
+}
+.bold {
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+.footerdata input {
+  display: block;
+  margin-bottom: 16px;
+  padding: 10px;
+}
+.footerdata p {
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+.footerdata button {
+  padding: 10px;
+  color: white;
+  background-color: #3d5054;
+  font-size: 18px;
+  border: none;
+}

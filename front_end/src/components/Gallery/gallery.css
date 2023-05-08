@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playball&display=swap");
+
+.bg-image {
+  width: 100%;
+
+  background-image: radial-gradient(
+      circle at right,
+      rgba(150, 173, 144, 0.4),
+      white,
+      rgba(248, 200, 168, 0.5)
+    ),
+    url("../../assets/bg-waves.png");
+
+  /*background-size: auto 100vh;*/
+
+  /*background-image : radial-gradient(circle at bottom left,,white);*/
+  /* background-repeat: repeat;*/
+}
+.gallery-text {
+  position: relative;
+  text-align: center;
+  font-size: 45px;
+  font-family: "Outfit", sans-serif; /* margin-bottom: 1px;*/
+}
+.listing-text {
+  font-family: "Outfit", sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: -60px;
+  padding-top: 3px;
+  width: 90%;
+  height: 200px;
+  background-color: #96ad90;
+}
+.listing-text p {
+  margin-top: 10px;
+  /*text-align: center;*/
+  margin-left: 20px;
+  font-size: 25px;
+  color: black;
+}
+.listing-text input {
+  margin-top: 10px;
+  height: 20px;
+  margin-right: 10px;
+}
+.salon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: -60px;
+  justify-content: center;
+  margin-bottom: 30px;
+  align-items: center;
+  /* display: grid;
+    margin-top: -50px;
+    padding-top: -50px;
+    grid-template-columns: 350px 350px 350px;
+    justify-content: center;*/
+}
+.salon-card {
+  flex-basis: 24%;
+  margin: 10px 0px;
+  /*box-shadow: 0px 0px 10px 3px #96ad90;*/
+  padding: 0px 0px;
+  padding-bottom: 40px;
+  margin-left: 50px;
+  height: 200px;
+  text-align: center;
+}
+.salon-image {
+  width: auto;
+}
+
+.salon-name {
+  margin-top: 1px;
+  font-family: "Outfit", sans-serif; /* margin-bottom: 1px;*/
+}
+.salon-description {
+  margin-top: -15px;
+  font-family: "Outfit", sans-serif; /* margin-bottom: 1px;*/
+}
+.salon-card:hover {
+  transform: translateY(-10px);
+  color: #0c291a;
+}
+.salon-image {
+  margin-top: 10px;
+  width: 80%;
+  height: 25vh;
+}
+.salon-content {
+  margin-top: 1px;
+}
+
+.salon-reg {
+  display: flex;
+  justify-content: space-between;
+
+  width: 90%;
+  margin-top: 0px;
+  margin: auto;
+  background-color: #96ad90;
+  height: 50px;
+  align-items: center;
+  font-family: "Outfit", sans-serif;
+}
+.salon-appointment {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 0px;
+  margin: auto;
+  background-color: #96ad90;
+  height: 50px;
+  margin-top: 10px;
+  align-items: center;
+}
+.salon-reg-text {
+  font-family: "Outfit", sans-serif;
+  margin-left: 30px;
+  font-size: 20px;
+}
+.btn-foot {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  margin-right: 20px;
+  color: rgb(12, 41, 26);
+  background-color: #cbbfbf;
+  font-size: 16px;
+  height: 40px;
+  font-family: "Playball", cursive;
+}
+.btn-foot:hover {
+  border: 2px solid #0c291a;
+}
+.search-container {
+  position: relative;
+}
+
+.search-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.search-bar.active {
+  background-color: white;
+  width: 100%;
+  height: 5vh;
+  padding: 0 10px;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  border: none;
+  color: transparent;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.search-btn .active {
+  padding: 10px 20px;
+  border: none;
+  color: black;
+  color: #fff;
+  cursor: pointer;
+  transition: all 2s ease-out;
+}
+
+/*Media query for responsiveness*/
+@media screen and (min-width: 601px) and (max-width: 927px) {
+  .salon-reg-text {
+    font-size: 20px;
+  }
+  .btn {
+    font-size: 22;
+  }
+  .salon-container {
+    width: 100%;
+
+    margin-top: -100px;
+  }
+  .salon-card {
+    margin: 10px;
+    padding-bottom: 5px;
+    flex-basis: 40%;
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .salon-reg-text {
+    font-size: 14px;
+  }
+  .btn-foot {
+    font-size: 14px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  .listing-text {
+    margin-top: -20px;
+    height: 160px;
+  }
+  .listing-text p {
+    margin-top: 15px;
+    margin-left: 20px;
+    font-size: 18px;
+  }
+  .listing-text input {
+    width: 10px;
+    margin-top: 10px;
+    height: 10px;
+    margin-right: 0px;
+  }
+  .gallery-text {
+    font-size: 20px;
+  }
+  .salon-container {
+    width: 100%;
+    flex-direction: column;
+    margin-top: -80px;
+  }
+  .salon-card {
+    margin: 10px;
+    padding-bottom: 5px;
+  }
+}
