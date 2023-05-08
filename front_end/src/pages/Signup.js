@@ -102,55 +102,6 @@ const SignUp = () => {
 
   // setting a preview for image
 
-  /* Fetch */
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (formData.pass !== formData.cpass) {
-  //     toast.error("password and confirm-password should be same", {
-  //       onClose: () => {
-  //         inputRef.current.focus();
-  //       },
-  //     });
-  //     setFormData({ ...formData, pass: "", cpass: "" });
-  //   } else {
-  //     toast.loading("Loading...");
-  //     setTimeout(() => {
-  //       toast.dismiss();
-  //     }, 3000);
-  //   }
-
-  //   const { username, email, pass, cpass, salonName, location, description } =
-  //     formData;
-
-  //   const form_Data = new FormData();
-  //   form_Data.append("username", username);
-  //   form_Data.append("email", email);
-  //   form_Data.append("pass", pass);
-  //   form_Data.append("cpass", cpass);
-  //   form_Data.append("salonName", salonName);
-  //   form_Data.append("location", location);
-  //   form_Data.append("description", description);
-  //   form_Data.append("profilePic", profileImg);
-
-  //   try {
-  //     const response = await fetch("http://localhost:8000/signup", {
-  //       method: "POST",
-  //       body: JSON.stringify(form_Data),
-  //     });
-  //     const isRegistered = await response.json();
-  //     if (isRegistered.status === 422 || !isRegistered) {
-  //       toast.error("Looks like you are already registered!");
-  //     } else if (isRegistered.ok) {
-  //       toast.success("Registration Successfull");
-  //     } else {
-  //       toast.error("Failed to create account");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     // handle error
-  //   }
-  // };
-
   useEffect(() => {
     if (profileImg) {
       const reader = new FileReader();
