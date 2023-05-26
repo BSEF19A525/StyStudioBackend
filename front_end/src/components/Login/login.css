@@ -15,15 +15,6 @@
   background-size: cover;
   width: 57vw;
 }
-.custom-file-upload {
-  cursor: pointer;
-  padding: 5px 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-  /* margin-bottom: 2rem; */
-  background-color: #3d5054;
-}
 
 /* ALI MALIK */
 .loginForm {

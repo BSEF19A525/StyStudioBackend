@@ -139,6 +139,7 @@ body {
   margin: auto;
   margin-bottom: 30px;
 }
+
 /*                                      Gallery   Component                                              */
 .gallerytop {
   display: flex;
@@ -170,7 +171,22 @@ body {
   display: flex;
   justify-content: center;
   background-color: #96ad90;
-  height: 36vh;
+  height: 35%;
+  /* height: 36vh; */
+}
+.btngallery{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3d5054;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  margin: auto;
+  margin-bottom: 30px;
 }
 .salongal {
   display: flex;
@@ -199,9 +215,25 @@ body {
 .upbtn {
   margin-top: 100px;
 }
+.upbtns{
+  display: none;
+  margin-top: 380px;
+}
+.btnsee {
+  display: flex;
+  background-color: #3d5054;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  margin: auto;
+  margin-bottom: 30px;
+}
 /*                                      testimonial component                                       */
 .testimonialtop {
-  margin-top: 100px;
+  /* margin-top: 100px; */
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
@@ -245,7 +277,8 @@ body {
   background-color: #98ad92;
   padding: 20px;
   border-radius: 26px;
-  height: 40vh;
+  height: 95%;
+  /* height: 40vh; */
 }
 .revimg {
   width: 150px;
@@ -282,7 +315,8 @@ body {
   line-height: 28px;
 }
 .booked {
-  margin-top: 40px;
+  /* margin-top: 40px; */
+  margin-bottom: 20px;
   background-color: #96ad90;
   padding: 26px 40px;
   border-radius: 14px;
@@ -355,4 +389,203 @@ body {
   background-color: #3d5054;
   font-size: 18px;
   border: none;
+}
+/*                                              hide menubar                                          */
+.color ul li a{
+  text-decoration: none;
+  color: rgb(19, 18, 18);
+  border: 1px solid rgb(239 217 203 / 50%);
+  padding: 12px 10px;
+  width: 100%;
+  text-align: center;
+ background-color: transparent;
+}
+.color ul{
+ 
+  list-style: none;
+}
+.color ul li{
+  
+  display: flex;
+  justify-content: center;
+}
+.headmenu{
+  display: none;
+  /* display: flex; */
+  justify-content: center;
+  margin-bottom: 22px;
+  margin-top: 20px;
+  font-size: 30px;
+}
+.headmenu a{
+  text-decoration: none;
+  color: rgb(8, 8, 8);
+}
+#iconhide i{
+  color: rgb(235 165 165);
+  border: 1px solid #f9e1de;
+  padding: 6px 8px;
+}
+.menubar1{
+  display: block;
+  width: 30%;
+}
+
+
+/* //////////////////////////               Responsive                    //////////////////////////// */
+@media (max-width: 1330px) {
+  .curline {
+    width:1200px ;
+  }
+  .curlines{
+    width: 1000px;
+  }
+}
+@media (max-width: 1024px) {
+  .curline,.curlines {
+    display:none;
+  }
+  .testimonialtop{
+    margin-top: -50px;
+  }
+  .gallerytop{
+    margin-bottom: 0px;
+  }
+  .footerhead{
+    margin-top: 90px;
+  }
+}
+@media (max-width: 912px) {
+  .galimg{
+    width: 235px;
+    height: 235px;
+  } 
+}
+@media (max-width: 820px) {
+  .navlinks{
+    display: none;
+  }
+  .headmenu{
+    display: flex;
+  }
+  .textwidth{
+    width: 45%;
+  }
+  .weleyes{
+    width: 350px;
+    height: 350px;
+  }
+  .weleyes img{
+    width: 100%;
+    height: 100%;
+  }
+  .faceimg{
+    height: 330px;
+  }
+  .salongal{
+    flex-wrap: wrap;
+  }
+  .salonsdata{
+    background-color: transparent;
+  }
+  .galimg{
+    width: 93%;
+    height: 254px;
+    margin: 20px;
+  }
+  .btngallery{
+    display: none;
+  }
+  .upbtns{
+    display: block;
+  }
+  .gallerytop{
+    margin-bottom: -355px;
+  }
+  .reviewbox{
+    flex-wrap: wrap;
+  }
+  .revwidth{
+    width: 100%;
+    height: auto;
+    margin-bottom: 100px;
+  }
+  .testrev{
+    width: 100%;
+  }
+  
+}
+@media (max-width: 540px) {
+  .welcomeflex{
+    flex-wrap: wrap;
+  }
+  .textwidth{
+    width: 100%;
+  }
+  .weleyes {
+    width: 250px;
+    height: 250px;
+    margin-left: 200px;
+    margin-top: -119px;
+  }
+  .abouttext{
+    width: 100%;
+  }
+  .booked{
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+  .booked h2{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .booked button{
+    margin: auto;
+  }
+  .gallerytext h1{
+    font-size: 30px;
+  }
+  .testrev{
+    font-size: 30px;
+  }
+}
+@media (max-width: 414px) {
+  .welcometext{
+    font-size: 35px;
+  }
+  .weleyes{
+    height: 200px;
+    margin-left: 100px;
+    margin-top: -30px;
+
+  }
+  .booked h2{
+    font-size: 22px;
+  }
+  .welcometext{
+    line-height: 45px;
+  }
+}
+@media (max-width: 412px) {
+  .footerhead{
+    margin-top: 20px;
+  } 
+}
+@media (max-width: 280px) {
+  .navwidth,.gallerywidth,.testwidth{
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+  } 
+  
+  .weleyes{
+    margin-top: -24px;
+    margin-left: 26px;
+  }
+  .footerhead{
+    margin-top: 85px;
+  }
+  .bgreen{
+    padding: 18px;
+  }
 }

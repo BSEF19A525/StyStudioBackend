@@ -5,6 +5,7 @@ import HomeGallery from "../components/Home/HomeGallery";
 import Testimonials from "../components/Home/Testimonials";
 import Welcome from "../components/Home/Welcome";
 import "../components/Home/Home.css";
+import Bookandregister from "../components/Home/Bookandregister";
 function Home() {
   return (
     <>
@@ -14,6 +15,7 @@ function Home() {
       </section>
       <HomeGallery />
       <Testimonials />
+      <Bookandregister/>
     </>
   );
 }

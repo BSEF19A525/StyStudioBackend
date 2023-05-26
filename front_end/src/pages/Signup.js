@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../components/SignUp/Signup.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -228,9 +228,9 @@ const SignUp = () => {
                 {/* Salon Short Description */}
                 <div className="short-desc">
                   {/* Linked with Img Browse */}
-                  <label htmlFor="profileImg" className="custom-file-upload">
+                  {/* <label htmlFor="profileImg" className="custom-file-upload">
                     Browse
-                  </label>
+                  </label> */}
                   <textarea
                     placeholder="Add short description about salon"
                     value={formData.description}
@@ -240,6 +240,9 @@ const SignUp = () => {
                   ></textarea>
                 </div>
               </div>
+              <label htmlFor="profileImg" className="custom-file-upload">
+                Browse
+              </label>
               <div className="sub-btn">
                 <button type="submit">Register</button>
               </div>
