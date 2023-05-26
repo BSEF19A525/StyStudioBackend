@@ -11,7 +11,7 @@ const Desktop1 = () => {
     <div className="desktop-1">
       <div className="desktop-1-child" />
       <div className="login">
-        <img className="login-child" alt="" src={pic1} />
+        <div className="login-child"><img  alt="none" src={pic1} /></div>
         <b className="login1">Login</b>
         <div className="please-enter-your">
           Please enter your login details to sign in

@@ -12,7 +12,7 @@ function Welcome() {
               Want all your local area Salons at one place?{" "}
             </h1>
           </div>
-          <div>
+          <div className="weleyes">
             <img src={eyes} alt="none" />
           </div>
         </div>

@@ -53,7 +53,7 @@
 }
 .date,
 .name,
-.salon-name,
+.salon-namebook,
 .service {
   border: 1px solid Black;
   font-size: 20px;
@@ -75,11 +75,11 @@
   padding: 16px 11px;
 }
 .date,
-.salon-name {
+.salon-namebook {
   width: 188px;
   padding: 16px 11px;
 }
-.salon-name {
+.salon-namebook {
   font-family: var(--font-inter);
   top: 272px;
   left: 489px;
@@ -147,7 +147,7 @@
   border-radius: 10px;
   box-sizing: border-box;
   width: 919px;
-  height: 588px;
+  height: 550px;
   overflow: hidden;
 }
 .booking2 {
@@ -160,6 +160,7 @@
 .desktop-2 {
   position: relative;
   background-color: var(--color-white);
+  margin-bottom: 50px;
   width: 100%;
   height: 629px;
   overflow: hidden;
