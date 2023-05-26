@@ -26,10 +26,13 @@ function HomeGallery() {
           </div>
         </div>
         <div className="upbtn">
-          <button className="btn">See more</button>
+          <button className="btngallery">See more</button>
         </div>
         <div className="curlines">
           <img src={lines} alt="none" />
+        </div>
+        <div className="upbtns">
+          <button className="btnsee">See more</button>
         </div>
       </div>
     </div>

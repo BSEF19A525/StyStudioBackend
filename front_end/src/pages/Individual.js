@@ -4,13 +4,15 @@ import Profile from "../components/Individual/Profile";
 import Services from "../components/Individual/Services";
 import Discount from "../components/Individual/Discount";
 import "../components/Individual/individual.css";
+import Bookandregister from "../components/Home/Bookandregister";
 const Individual = () => {
   return (
     <>
-      <NavBg />
+      {/* <NavBg /> */}
       <Profile />
       <Services />
-      <Discount />
+      {/* <Discount /> */}
+      <Bookandregister/>
     </>
   );
 };

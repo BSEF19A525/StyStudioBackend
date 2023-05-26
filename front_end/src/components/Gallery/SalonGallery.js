@@ -3,15 +3,18 @@ import Salons from "./Salons";
 import content from "../../content";
 import Searchbar from "./Searhbar";
 import "./gallery.css";
+import Bookandregister from "../Home/Bookandregister";
 
 const SalonGallery = (props) => {
   return (
     <>
+    <div className="gallery-text"><h1> Gallery </h1></div>
+
       <div className="bg-image">
-        <div className="gallery-text">
+         {/* <div className="gallery-text">
           {" "}
           <h1> Gallery </h1>{" "}
-        </div>
+        </div>  */}
         <div>
           <Searchbar />
         </div>
@@ -27,7 +30,7 @@ const SalonGallery = (props) => {
           ))}
         </div>{" "}
         {/*salon listing starts here*/}
-        <div className="salon-reg">
+        {/* <div className="salon-reg">
           <h4 className="salon-reg-text">
             Want to become the best salon in your area?
           </h4>{" "}
@@ -38,7 +41,8 @@ const SalonGallery = (props) => {
             Book your appointment today in one of the best salons{" "}
           </h4>{" "}
           <button className="btn-foot"> Book An Appointment</button>
-        </div>
+        </div> */}
+        <Bookandregister/>
       </div>
     </>
   );
