@@ -1,10 +1,10 @@
 import React from "react";
-import Desktop2 from "../components/BookAppointment/book";
 import "../components/BookAppointment/book.css";
+import Bookappoint from "../components/BookAppointment/Bookappoint";
 const Booking = () => {
   return (
     <>
-      <Desktop2 />
+      <Bookappoint/>
     </>
   );
 };
