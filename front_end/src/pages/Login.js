@@ -1,10 +1,10 @@
 import React from "react";
-import Desktop1 from "../components/Login/login";
+import LoginForm from "../components/Login/LoginForm";
 import "../components/Login/login.css";
 const Login = () => {
   return (
     <>
-      <Desktop1 />
+      <LoginForm />
     </>
   );
 };

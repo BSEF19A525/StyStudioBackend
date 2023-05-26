@@ -7,6 +7,12 @@ function Navbar() {
     const aboutSection = document.querySelector("#about");
     aboutSection.scrollIntoView({ behavior: "smooth", offset: -50 });
   };
+
+  // const scrollToFooter = () => {
+  //   const footerSection = document.querySelector("#contact");
+  //   footerSection.scrollIntoView({ behavior: "smooth", offset: -100 });
+  // };
+
   return (
     <div className="top">
       <div className="navwidth">
@@ -32,7 +38,7 @@ function Navbar() {
                   <NavLink to="/gallery">Gallery</NavLink>
                 </li>
                 <li>
-                  <a href="/">Contact</a>
+                  <Link to="/contact">Contact</Link>
                 </li>
                 <li>
                   <NavLink to="/login">Login</NavLink>

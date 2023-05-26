@@ -1,11 +1,12 @@
 const cors = require("cors");
+const fs = require("fs");
 const express = require("express");
 const app = express();
 const multer = require("multer");
 const connectDB = require("./connection/connection");
 const SalonOwner = require("./models/ownerSchema");
 
-connectDB();
+const client = connectDB();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -17,11 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const upload = multer({ dest: "public/uploads/" });
-
+// Signup
 app.post("/signup", upload.single("profileImg"), async (req, res) => {
   const { username, email, pass, cpass, salonName, location, description } =
     req.body;
-
   const file = req.file;
   const imageUrl = file.filename;
   console.log(imageUrl);
@@ -48,6 +48,40 @@ app.post("/signup", upload.single("profileImg"), async (req, res) => {
     }
   }
 });
+// Login
+app.post("/login", async (req, res) => {
+  const { email, pass } = req.body;
+
+  try {
+    const user = await SalonOwner.findOne({ email: email });
+    console.log(user);
+    if (user && user.pass == pass) {
+      res.status(200).json({ msg: "Login Successfull" });
+    } else {
+      res.status(401).json({ msg: "Invalid Credentials" });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+// this code is working fine
+// app.get("/image/:filename", (req, res) => {
+//   const filename = req.params.filename;
+//   const imagePath = `${__dirname}/public/uploads/${filename}`;
+
+//   // Check if the file exists
+//   if (fs.existsSync(imagePath)) {
+//     // Set the appropriate content type
+//     res.setHeader("Content-Type", "image/jpeg");
+
+//     // Send the image file as a response
+//     res.sendFile(imagePath);
+//   } else {
+//     // Return a 404 response if the file doesn't exist
+//     res.status(404).json({ msg: "Image not found" });
+//   }
+// });
 
 app.listen(8000, () => {
   console.log("Server Started Successfully");

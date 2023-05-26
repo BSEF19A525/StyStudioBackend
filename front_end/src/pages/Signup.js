@@ -97,6 +97,16 @@ const SignUp = () => {
       setTimeout(() => {
         toast.error("Looks like you are already registered");
       }, 4000);
+      // setFormData({
+      //   username: "",
+      //   email: "",
+      //   pass: "",
+      //   cpass: "",
+      //   salonName: "",
+      //   location: "",
+      //   description: "",
+      // });
+      // setProfileImg(null);
     }
   };
 

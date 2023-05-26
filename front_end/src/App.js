@@ -17,7 +17,7 @@ const App = () => {
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
     location.pathname === "/Book" ||
-    location.pathname === "/confirmPass";
+    location.pathname === "/changePass";
 
   return (
     <>
@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/confirmPass" element={<Password />} />
+        <Route path="/changePass" element={<Password />} />
         <Route path="/Book" element={<Booking />} />
         <Route path="/ind" element={<Individual />} />
       </Routes>
