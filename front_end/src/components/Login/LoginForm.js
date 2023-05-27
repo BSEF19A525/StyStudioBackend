@@ -46,7 +46,7 @@ const LoginForm = () => {
           toast.success("Login Successfull");
         }, 4000);
         setTimeout(() => {
-          navigate("/ind");
+          navigate("/individual");
         }, 10000);
       }
     } catch (error) {

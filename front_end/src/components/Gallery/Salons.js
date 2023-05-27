@@ -2,7 +2,7 @@ import React from "react";
 const Salons = (props) => {
   return (
     <div className="salon-card">
-      <div >
+      <div>
         <div key={props.id}>
           <img src={props.image} alt="salon img" className="salon-image"></img>
 

@@ -61,52 +61,44 @@ const SignUp = () => {
     form_Data.append("description", description);
     form_Data.append("profileImg", profileImg);
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/signup",
-        form_Data,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      if (response.status === 200) {
-        console.log(response);
+    if (pass === cpass) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/signup",
+          form_Data,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        if (response.status === 200) {
+          console.log(response);
+          setTimeout(() => {
+            toast.success("Registration Successfull");
+          }, 4000);
+          setTimeout(() => {
+            setFormData({
+              username: "",
+              email: "",
+              pass: "",
+              cpass: "",
+              salonName: "",
+              location: "",
+              description: "",
+            });
+            setProfileImg(null);
+          }, 4000);
+          setTimeout(() => {
+            navigate("/login");
+          }, 10000);
+        }
+        if (response.status === 422 || !response.data) {
+        } else if (response.status === 422 || !response.data) {
+          toast.error("Looks like you are already registered");
+        }
+        // handle success
+      } catch (error) {
         setTimeout(() => {
-          toast.success("Registration Successfull");
+          toast.error("Looks like you are already registered");
         }, 4000);
-        setTimeout(() => {
-          setFormData({
-            username: "",
-            email: "",
-            pass: "",
-            cpass: "",
-            salonName: "",
-            location: "",
-            description: "",
-          });
-          setProfileImg(null);
-        }, 4000);
-        setTimeout(() => {
-          navigate("/login");
-        }, 10000);
       }
-      if (response.status === 422 || !response.data) {
-      } else if (response.status === 422 || !response.data) {
-        toast.error("Looks like you are already registered");
-      }
-      // handle success
-    } catch (error) {
-      setTimeout(() => {
-        toast.error("Looks like you are already registered");
-      }, 4000);
-      // setFormData({
-      //   username: "",
-      //   email: "",
-      //   pass: "",
-      //   cpass: "",
-      //   salonName: "",
-      //   location: "",
-      //   description: "",
-      // });
-      // setProfileImg(null);
     }
   };
 

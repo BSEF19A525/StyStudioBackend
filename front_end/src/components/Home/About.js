@@ -13,13 +13,13 @@ function About() {
             <h3>Welcome To</h3>
             <h1>StyStudio</h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-              nibh dolor, gravida faucibus dolor consectetur, pulvinar rhoncus
-              risus. Fusce vel rutrum mi. Suspendisse pretium tellus eu ipsum
-              pellentesque convallis. Ut mollis libero eu massa imperdiet
-              faucibus vitae non diam. Sed egestas felis libero, ut suscipit
-              nisl varius non. Proin eget suscipit nulla. Nulla facilisi. In hac
-              habitasse platea dictumst.
+              Empowering salons to showcase their services on a centralized
+              platform. Streamlining salon discovery and connecting salons with
+              customers. A comprehensive solution for salons to register, create
+              profiles, and attract a broader customer base. User-friendly
+              interface and extensive features for seamless salon promotion. The
+              go-to platform for discovering and booking top-notch salon
+              services.
             </p>
             <button className="btn">Read more</button>
           </div>

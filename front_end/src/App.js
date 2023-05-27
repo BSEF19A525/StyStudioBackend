@@ -31,7 +31,8 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/changePass" element={<Password />} />
         <Route path="/Book" element={<Booking />} />
-        <Route path="/ind" element={<Individual />} />
+        <Route path="/individual/:id" element={<Individual />} />
+        <Route exact="true" path="/individual" element={<Individual />} />
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
     </>

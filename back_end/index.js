@@ -6,7 +6,7 @@ const multer = require("multer");
 const connectDB = require("./connection/connection");
 const SalonOwner = require("./models/ownerSchema");
 
-const client = connectDB();
+connectDB();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -65,23 +65,105 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// this code is working fine
-// app.get("/image/:filename", (req, res) => {
-//   const filename = req.params.filename;
-//   const imagePath = `${__dirname}/public/uploads/${filename}`;
+// app.get("/api/data", async (req, res) => {
+//   try {
+//     const data = await SalonOwner.find();
+//     const { _id, username, salonName, location, description, profileImg } =
+//       data;
 
-//   // Check if the file exists
-//   if (fs.existsSync(imagePath)) {
-//     // Set the appropriate content type
-//     res.setHeader("Content-Type", "image/jpeg");
-
-//     // Send the image file as a response
-//     res.sendFile(imagePath);
-//   } else {
-//     // Return a 404 response if the file doesn't exist
-//     res.status(404).json({ msg: "Image not found" });
+//     console.log(profileImg);
+//   } catch (error) {
+//     console.log("Error fetching data:", error);
+//     res.status(500).json({ error: "Internal server error" });
 //   }
 // });
+
+app.get("/api/data", async (req, res) => {
+  try {
+    const data = await SalonOwner.find();
+
+    const salonDataArray = data.map((owner) => ({
+      _id: owner._id,
+      username: owner.username,
+      salonName: owner.salonName,
+      location: owner.location,
+      description: owner.description,
+      profileImg: owner.profileImg,
+    }));
+
+    res.status(200).json(salonDataArray);
+  } catch (error) {
+    console.log("Error fetching data:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// for fetching image data
+app.get("/api/image/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const imagePath = `${__dirname}/public/uploads/${filename}`;
+
+  if (fs.existsSync(imagePath)) {
+    res.sendFile(imagePath);
+  } else {
+    res.status(404).json({ error: "Image not found" });
+  }
+});
+
+// for searching salon based on location
+
+// app.get("/api/data/:location", async (req, res) => {
+//   const { location } = req.params;
+//   const area = decodeURIComponent(location);
+//   const searchLocation = area.toLowerCase();
+//   console.log(searchLocation); // Output: model town
+
+//   // regex will be performing case insensitive regular expression match
+//   try {
+//     const salons = await SalonOwner.find({
+//       location: { $regex: searchLocation, $options: "i" },
+//     });
+
+//     if (salons.length === 0) {
+//       return res
+//         .status(404)
+//         .json({ msg: "No salons found in the specified location" });
+//     }
+
+//     res.status(200).json(salons);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ msg: "Internal Server Error" });
+//   }
+// });
+
+app.get("/api/data/:location", async (req, res) => {
+  const { location } = req.params;
+  const area = decodeURIComponent(location);
+  const searchLocation = area.toLowerCase();
+  console.log(searchLocation); // Output: model town
+
+  try {
+    const salons = await SalonOwner.find({
+      location: { $regex: searchLocation, $options: "i" },
+    });
+
+    if (salons.length === 0) {
+      return res
+        .status(404)
+        .json({ msg: "No salons found in the specified location" });
+    }
+
+    res.status(200).json(salons);
+  } catch (error) {
+    if (error.name === "CastError") {
+      // Handle the case when the provided location is not a valid search parameter
+      return res.status(400).json({ msg: "Invalid search location" });
+    }
+    console.error(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
 
 app.listen(8000, () => {
   console.log("Server Started Successfully");

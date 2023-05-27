@@ -4,9 +4,10 @@ import { IconContext } from "react-icons";
 import { FaSearch } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 
-const Searhbar = () => {
+const Searhbar = ({ searchSalon }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isbuttonClicked, setIsButtonClicked] = useState(false);
+
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +21,13 @@ const Searhbar = () => {
     setIsButtonClicked(!isbuttonClicked);
     setIsClicked(!isClicked);
   };
+
+  const handleSearchInputChange = (e) => {
+    const { value } = e.target;
+    // itemSearch(value);
+    searchSalon(value);
+  };
+
   return (
     <div className="listing-text">
       <p>Find best salons in your area</p>
@@ -41,7 +49,7 @@ const Searhbar = () => {
           placeholder="Search"
           ref={searchRef}
           //value={searchTerm}
-          // onChange={handleSearchInputChange}
+          onChange={handleSearchInputChange}
         />
       </div>
     </div>
