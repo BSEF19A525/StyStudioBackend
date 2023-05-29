@@ -17,9 +17,9 @@ function Welcome() {
           </div>
         </div>
       </div>
-      <div className="curline">
+      {/* <div className="curline">
         <img src={lines} alt="none" />
-      </div>
+      </div> */}
     </>
   );
 }

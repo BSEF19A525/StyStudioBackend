@@ -5,7 +5,7 @@ function About() {
   return (
     <div className="top">
       <div className="navwidth">
-        <div className="welcomeflex">
+        <div className="welcomeflex about-flex">
           <div className="faceimg">
             <img src={face} alt="none" />
           </div>
@@ -21,7 +21,7 @@ function About() {
               go-to platform for discovering and booking top-notch salon
               services.
             </p>
-            <button className="btn">Read more</button>
+            <button className="btn">See More</button>
           </div>
         </div>
       </div>

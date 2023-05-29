@@ -112,31 +112,6 @@ app.get("/api/image/:filename", (req, res) => {
 
 // for searching salon based on location
 
-// app.get("/api/data/:location", async (req, res) => {
-//   const { location } = req.params;
-//   const area = decodeURIComponent(location);
-//   const searchLocation = area.toLowerCase();
-//   console.log(searchLocation); // Output: model town
-
-//   // regex will be performing case insensitive regular expression match
-//   try {
-//     const salons = await SalonOwner.find({
-//       location: { $regex: searchLocation, $options: "i" },
-//     });
-
-//     if (salons.length === 0) {
-//       return res
-//         .status(404)
-//         .json({ msg: "No salons found in the specified location" });
-//     }
-
-//     res.status(200).json(salons);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ msg: "Internal Server Error" });
-//   }
-// });
-
 app.get("/api/data/:location", async (req, res) => {
   const { location } = req.params;
   const area = decodeURIComponent(location);

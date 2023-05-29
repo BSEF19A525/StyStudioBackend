@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import { NavLink, Link } from "react-router-dom";
 import Menuhide from "./Menuhide";
@@ -8,9 +8,13 @@ function Navbar() {
     const aboutSection = document.querySelector("#about");
     aboutSection.scrollIntoView({ behavior: "smooth", offset: -50 });
   };
-  const show = () => {
-    <Menuhide />;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeMenu = () => {
+    setIsOpen(false);
   };
+
   return (
     <>
       <div className="top">
@@ -39,7 +43,7 @@ function Navbar() {
                     <NavLink to="/gallery">Gallery</NavLink>
                   </li>
                   <li>
-                    <Link to="/contact"> Contact</Link>
+                    <NavLink to="/contact"> Contact</NavLink>
                   </li>
                   <li>
                     <NavLink to="/login">Login</NavLink>
@@ -48,13 +52,25 @@ function Navbar() {
                     <NavLink to="/signup">Register</NavLink>
                   </li>
                 </ul>
-              </div>
+              </div>{" "}
             </div>
             {/* show  hide menubar */}
-            <div className="headmenu">
-              <i className="fa fa-align-justify" onClick={show}></i>
-            </div>
+            {isOpen && (
+              <Menuhide
+                openSideBar={setIsOpen}
+                scrollToAbout={scrollToAbout}
+                closeMenu={closeMenu}
+              />
+            )}
           </div>
+        </div>
+        <div className="headmenu">
+          <i
+            className="fa fa-align-justify"
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          ></i>
         </div>
       </div>
       {/* <Menuhide/> */}
