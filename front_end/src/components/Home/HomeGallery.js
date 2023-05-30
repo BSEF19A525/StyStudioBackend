@@ -30,7 +30,7 @@ const HomeGallery = () => {
   }, []);
   return (
     <>
-      <div className="gallerytop">
+      <div className="gallerytop" id="gallerysection">
         <div className="gallerywidth">
           <div className="gallerytext">
             <h1>Here you can find</h1>

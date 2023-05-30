@@ -1,8 +1,20 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
 
-const Menuhide = ({ openSideBar, scrollToAbout, closeMenu }) => {
+const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout }) => {
+  const location = useLocation();
+
   const handleLinkClick = () => {
+    closeMenu();
+  };
+
+  const moveToContact = () => {
+    scrollBottom();
+    closeMenu();
+  };
+
+  const moveToAbout = () => {
+    scrollToAbout();
     closeMenu();
   };
 
@@ -25,14 +37,10 @@ const Menuhide = ({ openSideBar, scrollToAbout, closeMenu }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/about"
-              className="nav-link"
-              onClick={{ scrollToAbout, handleLinkClick }}
-            >
+            <Link to="/about" className="nav-link" onClick={moveToAbout}>
               {" "}
               About
-            </NavLink>
+            </Link>
           </li>
           <li>
             <NavLink
@@ -47,7 +55,7 @@ const Menuhide = ({ openSideBar, scrollToAbout, closeMenu }) => {
             <NavLink
               to="/contact"
               className="nav-link"
-              onClick={handleLinkClick}
+              onClick={(handleLinkClick, moveToContact)}
             >
               {" "}
               Contact

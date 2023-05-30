@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.png";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
+import { scroller } from "react-scroll";
 
 function Navbar() {
+  const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/gallery" || location.pathname === "/") {
+      setScrollToAboutOnLoad(true);
+    }
+  }, [location.pathname]);
+
   const scrollToAbout = () => {
-    const aboutSection = document.querySelector("#about");
-    aboutSection.scrollIntoView({ behavior: "smooth", offset: -50 });
+    if (scrollToAboutOnLoad) {
+      setTimeout(() => {
+        scroller.scrollTo("aboutSection", {
+          smooth: true,
+          offset: -50,
+        });
+      }, 500); // Adjust the delay as needed
+    }
   };
 
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = () => {
     setIsOpen(false);
+  };
+
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      const footerSection = document.getElementById("footersection");
+      if (footerSection) {
+        footerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 900);
   };
 
   return (
@@ -30,12 +56,12 @@ function Navbar() {
               <div className="menuflex">
                 <ul>
                   <li>
-                    {" "}
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink exact to="/">
+                      Home
+                    </NavLink>
                   </li>
                   <li>
                     <Link to="/about" onClick={scrollToAbout}>
-                      {" "}
                       About
                     </Link>
                   </li>
@@ -43,7 +69,9 @@ function Navbar() {
                     <NavLink to="/gallery">Gallery</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/contact"> Contact</NavLink>
+                    <NavLink to="/contact" onClick={scrollToBottom}>
+                      Contact
+                    </NavLink>
                   </li>
                   <li>
                     <NavLink to="/login">Login</NavLink>
@@ -52,14 +80,15 @@ function Navbar() {
                     <NavLink to="/signup">Register</NavLink>
                   </li>
                 </ul>
-              </div>{" "}
+              </div>
             </div>
             {/* show  hide menubar */}
             {isOpen && (
               <Menuhide
                 openSideBar={setIsOpen}
-                scrollToAbout={scrollToAbout}
                 closeMenu={closeMenu}
+                scrollBottom={scrollToBottom}
+                scrollToAbout={scrollToAbout}
               />
             )}
           </div>

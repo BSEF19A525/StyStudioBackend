@@ -5,7 +5,7 @@ import review3 from "../../assets/review3.png";
 
 function Testimonials() {
   return (
-    <div className="testimonialtop">
+    <div className="testimonialtop test-margin">
       <div className="testwidth">
         <div className="gallerytext">
           <p>TESTIMONIALS</p>

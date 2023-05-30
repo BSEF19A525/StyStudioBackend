@@ -118,9 +118,10 @@ body {
   text-align: center;
 }
 .abouttext p {
-  font-family: "Arima Madurai";
+  /* font-family: ""; */
+  font-family: "Outfit";
   font-style: normal;
-  font-weight: 800;
+  font-weight: 500;
   font-size: 20px;
   line-height: 30px;
   text-align: center;
@@ -245,7 +246,8 @@ body {
 
 .img-style {
   transition: transform 0.3s ease;
-  height: 50vh;
+
+  height: 300px;
   width: 100%;
 }
 .overlay {
@@ -271,7 +273,7 @@ body {
 
 /*                                      testimonial component                                       */
 .testimonialtop {
-  /* margin-top: 100px; */
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
@@ -280,7 +282,6 @@ body {
   width: 80%;
 }
 .gallerytext p {
-  margin-top: 30px;
   font-family: "Outfit";
   font-style: normal;
   font-weight: 500;
@@ -385,15 +386,33 @@ body {
 }
 
 /*                                          Footer Component                                            */
+.footer-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.footer-width {
+  width: 80%;
+}
+.fsec-w {
+  width: 23%;
+}
+.f-logo {
+  height: 100%;
+  width: unset;
+}
 .bgreen {
   background-color: #98ad92;
   border-top-left-radius: 26px;
   border-bottom-left-radius: 26px;
   padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
+
 .footerhead {
-  margin-top: 50px;
-  margin-left: -100px;
   font-family: "Rubik Glitch";
   font-style: normal;
   font-weight: 400;
@@ -405,6 +424,7 @@ body {
   list-style: none;
   margin-top: 10px;
 }
+
 .quicklinks ul li a {
   text-decoration: none;
   color: black;
@@ -429,6 +449,7 @@ body {
   background-color: #3d5054;
   font-size: 18px;
   border: none;
+  cursor: pointer;
 }
 /*                                              hide menubar                                          */
 .color ul li a {
@@ -484,15 +505,6 @@ body {
   list-style: none;
   text-align: center;
 }
-/* 768px */
-/* .sidebar-menu {
-  background: white;
-  width: 400px;
-  position: fixed;
-  right: 56px;
-  z-index: 1;
-  top: 40px;
-} */
 
 .sidebar-menu ul li {
   padding: 30px 0px;
@@ -544,14 +556,12 @@ body {
   .curlines {
     display: none;
   }
-  .testimonialtop {
-    margin-top: -50px;
+  .fsec-w {
+    width: 48%;
+    margin-bottom: 30px;
   }
   .gallerytop {
     margin-bottom: 0px;
-  }
-  .footerhead {
-    margin-top: 90px;
   }
 }
 @media (max-width: 950px) {
@@ -599,6 +609,9 @@ body {
   .textwidth {
     width: 45%;
   }
+  .test-margin {
+    margin-top: 20rem;
+  }
   .weleyes {
     width: 350px;
     height: 350px;
@@ -618,7 +631,6 @@ body {
   }
   .galimg {
     width: 100%;
-    height: auto;
     margin: 20px;
   }
   .btngallery {
@@ -626,7 +638,6 @@ body {
   }
   .galimg .img-style {
     width: 100%;
-    height: auto;
   }
   .upbtns {
     display: block;
@@ -640,10 +651,15 @@ body {
   .revwidth {
     width: 100%;
     height: auto;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
+    margin-bottom: 8rem; /* Ali Malik Added this */
   }
   .testrev {
     width: 100%;
+  }
+
+  .book-register {
+    margin-top: -6rem;
   }
 }
 /* Ali Added this Css */
@@ -655,6 +671,20 @@ body {
   .textwidth {
     width: 50%;
   }
+  .faceimg {
+    width: 290px;
+  }
+  .booked {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .booked h2 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .booked button {
+    margin: auto;
+  }
 }
 /* Ali Added this Css */
 @media (max-width: 576px) {
@@ -664,12 +694,28 @@ body {
   .abouttext {
     margin-left: 0;
   }
+
+  .fsec-w {
+    width: 100%;
+  }
+  .bgreen {
+    text-align: center;
+  }
+
+  .quicklinks {
+    margin-top: 3rem;
+  }
   .welcomeflex {
     flex-wrap: wrap-reverse;
     justify-content: center;
   }
   .welcometext {
     line-height: 50px;
+  }
+  .footerdata {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
   .textwidth {
     width: 100%;
@@ -696,17 +742,6 @@ body {
     font-size: 30px;
   }
 
-  .booked {
-    flex-wrap: wrap;
-    padding: 12px;
-  }
-  .booked h2 {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .booked button {
-    margin: auto;
-  }
   .gallerytext h1 {
     font-size: 30px;
   }
@@ -733,6 +768,9 @@ body {
 @media (max-width: 412px) {
   .footerhead {
     margin-top: 20px;
+  }
+  .galimg .img-style {
+    width: 80vw;
   }
 }
 @media (max-width: 280px) {

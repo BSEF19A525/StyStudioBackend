@@ -4,7 +4,7 @@ function Bookandregister() {
   const navigate = useNavigate(null);
 
   return (
-    <div className="testimonialtop">
+    <div className="testimonialtop book-register">
       <div className="testwidth">
         <div className="booked">
           <h2>Want to become the best salon in your area?</h2>
