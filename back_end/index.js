@@ -7,6 +7,7 @@ const connectDB = require("./connection/connection");
 const SalonOwner = require("./models/ownerSchema");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 connectDB();
 
@@ -72,7 +73,7 @@ app.post("/login", async (req, res) => {
     
     if (user && user.pass == pass) {
       //user logged in, validating session
-      req.session.user = req.body;
+      /*req.session.user = req.body;
       console.log("req.session.user");
       console.log(req.session.user);
       // saving the session
@@ -80,9 +81,15 @@ app.post("/login", async (req, res) => {
       console.log("session saved");
       console.log(req.session.loggedIn);
       console.log(req.session.user);
-      res.status(200).json({ loggedIn: req.session.loggedIn, username: req.session.user, msg: "Login Successfull"});
-      console.log("response has been shared");
-      //res.status(200).json({ msg: "Login Successfull" });
+      res.status(200).json({loggedIn : true, username: user.username, msg: "Login Successfull"});
+      console.log("response has been shared");*/
+      const token = await user.generateAuthToken();
+      res.cookie("jwtoken",token,{
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly:true
+      })
+      console.log("cookie saved successfully");
+      res.status(200).json({ msg: "Login Successfull" });
     } else {
       res.status(401).json({ msg: "Invalid Credentials" });
     }

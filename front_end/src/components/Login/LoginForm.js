@@ -3,12 +3,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Home/Navbar";
 
 const LoginForm = () => {
   const [loginDetails, setloginDetails] = useState({
     email: "",
     pass: "",
   });
+  const [user, setUser] = useState({ username: '', loggedIn: false });
 
   const navigate = useNavigate(null);
 
@@ -45,9 +47,12 @@ const LoginForm = () => {
         setTimeout(() => {
           
           toast.success("Login Successfull");
-          const {loggedIn, username} = response.data;
-          console.log("Logged in ? : ", loggedIn);
-          console.log("user email : ", username);
+          const data = response.data;
+          console.log(data);
+          const loggedInUser = {username : data.username, loggedIn: data.loggedIn}
+          console.log("User state object : ", loggedInUser);
+          console.log("username is : ", data.username);
+          setUser(loggedInUser);
         }, 4000);
         setTimeout(() => {
           navigate("/individual");
@@ -70,6 +75,7 @@ const LoginForm = () => {
 
   return (
     <>
+    <Navbar user = {user}></Navbar>
       <div className="Login-Wrapper">
         <div className="login-sideImg"></div>
         <div className="loginForm">
