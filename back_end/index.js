@@ -5,6 +5,8 @@ const app = express();
 const multer = require("multer");
 const connectDB = require("./connection/connection");
 const SalonOwner = require("./models/ownerSchema");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 connectDB();
 
@@ -16,6 +18,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // middleware to allow different ports to share data
 app.use(cors());
+
+app.use(cookieParser());
+
+// middleware for session management
+app.use(session({
+  resave:true, //forces the session to be saved back at session store
+  saveUninitialized:true, //forces an uninitialized session to be saved at session store
+  secret: "secret"  //used to sign the session's Cookie Id
+})
+);
 
 const upload = multer({ dest: "public/uploads/" });
 // Signup
@@ -52,11 +64,25 @@ app.post("/signup", upload.single("profileImg"), async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, pass } = req.body;
 
+      
+
   try {
+
     const user = await SalonOwner.findOne({ email: email });
-    console.log(user);
+    
     if (user && user.pass == pass) {
-      res.status(200).json({ msg: "Login Successfull" });
+      //user logged in, validating session
+      req.session.user = req.body;
+      console.log("req.session.user");
+      console.log(req.session.user);
+      // saving the session
+      req.session.save();
+      console.log("session saved");
+      console.log(req.session.loggedIn);
+      console.log(req.session.user);
+      res.status(200).json({ loggedIn: req.session.loggedIn, username: req.session.user, msg: "Login Successfull"});
+      console.log("response has been shared");
+      //res.status(200).json({ msg: "Login Successfull" });
     } else {
       res.status(401).json({ msg: "Invalid Credentials" });
     }
@@ -65,6 +91,17 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/logout", (req,res) =>{
+  
+  try{
+  req.session.destroy();
+  console.log("session destroyed successfully")
+  res.status(200).json({msg: "User logged out successfully"});
+  }
+  catch(error){
+    res.status(500).json({msg: "Internal Server Error"});
+  }
+})
 // app.get("/api/data", async (req, res) => {
 //   try {
 //     const data = await SalonOwner.find();

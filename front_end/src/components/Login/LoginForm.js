@@ -43,7 +43,11 @@ const LoginForm = () => {
       });
       if (response.status === 200) {
         setTimeout(() => {
+          
           toast.success("Login Successfull");
+          const {loggedIn, username} = response.data;
+          console.log("Logged in ? : ", loggedIn);
+          console.log("user email : ", username);
         }, 4000);
         setTimeout(() => {
           navigate("/individual");

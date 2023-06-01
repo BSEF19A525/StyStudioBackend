@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import logo from "../../assets/logo.png";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
 
+
 function Navbar() {
   const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
 
   const location = useLocation();
+  
+/*
+  axios.post("http://localhost:8000/login").then(response =>{
+    const {loggedIn, username} = response.data;
+    console.log("Logged in ? : ", loggedIn);
+    console.log("user email : ", username);
+
+
+  }).catch(error =>{
+    console.error('Error fetching sessions data : ',error);
+  });
+*/
 
   useEffect(() => {
     if (location.pathname === "/gallery" || location.pathname === "/") {
@@ -78,6 +92,12 @@ function Navbar() {
                   </li>
                   <li>
                     <NavLink to="/signup">Register</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/signup">User</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/logout"> Log Out</NavLink>
                   </li>
                 </ul>
               </div>
