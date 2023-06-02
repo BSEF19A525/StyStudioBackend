@@ -140,6 +140,25 @@ app.get("/api/data/:location", async (req, res) => {
   }
 });
 
+// for fetching salon email based on name
+app.get("/book/:salonName", async (req, res) => {
+  const { salonName } = req.params;
+  console.log(salonName); 
+
+  try {
+    const salon = await SalonOwner.find({salonName});
+
+    if (!salon) {
+       res.status(404).json({ msg: "No such salons found" });
+    }
+
+    res.status(200).json(salon);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
 app.listen(8000, () => {
   console.log("Server Started Successfully");
 });

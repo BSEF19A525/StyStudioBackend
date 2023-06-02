@@ -1,25 +1,45 @@
 const Desktop3 = () => {
   return (
-    <div className="desktop-3">
-      <div className="desktop-3-child" />
-      <b className="change-password">Change Password</b>
-      <input
-        className="password"
-        type="password"
-        placeholder="New Password"
-        maxLength={10}
-        minLength={8}
-      />
-      <input
-        className="confirm"
-        type="password"
-        placeholder="Confirm Password"
-        maxLength={10}
-        minLength={8}
-      />
-      <button className="setpass">
-        <b className="set-password">Set Password</b>
-      </button>
+    <div className="changepassflex">
+      <div className="changepasswidth">
+        <div className="changepassjustify">
+            <form action="">
+            <div className="changeinput">
+            <input className="chpsin"
+                  type="email"
+                  // value={formData.email}
+                  // onChange={handleChange}
+                  placeholder="Email Address"
+                  name="email"
+                  required
+                /> 
+                </div>
+                <div className="changeinput">
+                <input className="chpsin"
+                  type="password"
+                  // value={formData.email}
+                  // onChange={handleChange}
+                  placeholder="New Password"
+                  name="newpass"
+                  required
+                />
+                </div>
+                <div className="changeinput">
+                <input className="chpsin"
+                  type="password"
+                  // value={formData.email}
+                  // onChange={handleChange}
+                  placeholder="Confirm Password"
+                  name="confpass"
+                  required
+                />
+                </div>
+                <div className="changebtn changeinput">
+                <button type="submit">Change Password</button>
+                 </div>            
+            </form>
+        </div>
+      </div>
     </div>
   );
 };
