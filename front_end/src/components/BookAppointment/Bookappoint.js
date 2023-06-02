@@ -54,6 +54,18 @@ function Bookappoint() {
     }
   };
 
+  // phone Validation Function
+  // const validatePhone = (phone) => {
+  //   const phoneNum = phone.length;
+  //   if (phoneNum < 12 && phoneNum >= 9) {
+  //     return phoneNum;
+  //   } else {
+  //     toast.error("Phone Number Should range from 9 - 11 digits");
+  //     setBookData({ ...bookData, phone: "" });
+  //     .current.focus();
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { fullName, phone, date, salonName, service } = bookData;
