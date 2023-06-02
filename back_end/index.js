@@ -161,6 +161,22 @@ app.get("/book/:salonName", async (req, res) => {
   }
 });
 
+// app.get("/book/:salonName", async (req, res) => {
+//   const { salonName } = req.params;
+//   console.log(salonName);
+
+//   try {
+//     const salon = await SalonOwner.find({ salonName });
+//     if (!salon) {
+//       res.status(404).json({ msg: "No Such Salon" });
+//     }
+//     // const salonsData = salon.data;
+//     res.status(200).json(salon);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ msg: "Internal Server Error" });
+//   }
+// });
 
 //change password logic 
 // get email of owner and match with db email
@@ -205,7 +221,6 @@ app.post('/changePass', async (req, res) => {
     return res.status(500).json({ message: 'Internal Server error' });
   }
 });
-
 
 app.listen(8000, () => {
   console.log("Server Started Successfully");
