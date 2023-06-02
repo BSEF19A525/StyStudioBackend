@@ -141,23 +141,71 @@ app.get("/api/data/:location", async (req, res) => {
 });
 
 // for fetching salon email based on name
+
 app.get("/book/:salonName", async (req, res) => {
-  const { salonName } = req.params;
-  console.log(salonName); 
+  let { salonName } = req.params;
+  salonName = new RegExp(`^${salonName}$`, "i"); // Case-insensitive regular expression
+
+  console.log(salonName);
 
   try {
-    const salon = await SalonOwner.find({salonName});
-
+    const salon = await SalonOwner.findOne({ salonName });
     if (!salon) {
-       res.status(404).json({ msg: "No such salons found" });
+      return res.status(404).json({ msg: "No Such Salon" });
     }
 
     res.status(200).json(salon);
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json({ msg: "Internal Server Error" });
   }
 });
+
+
+//change password logic 
+// get email of owner and match with db email
+app.get("/changePass/:email", async (req, res) => {
+  let { email } = req.params;
+  // salonemail = new RegExp(`^${email}$`, "i"); // Case-insensitive regular expression
+
+  console.log(email);
+  try {
+    const salonmail = await SalonOwner.findOne({ email });
+    if (!salonmail) {
+      console.log("NO such data found")
+      return res.status(404).json({ msg: "No Such Data found" });
+    }
+    res.status(200).json(salonmail);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+})
+
+//post new password in place of old password
+app.post('/changePass', async (req, res) => {
+  try {
+    const { email, newpass } = req.body;
+
+    // Retrieve the user from the database based on the email
+    const user = await SalonOwner.findOne({ email });
+    if (!user) {
+      // User not found
+      return res.status(404).json({ message: 'User not found' });
+    }
+    // Assign the new password to the user
+    user.pass = newpass;
+    user.cpass=newpass;
+    // Save the updated user record back to the database
+    await user.save();
+    // Password updated successfully
+    return res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server error' });
+  }
+});
+
 
 app.listen(8000, () => {
   console.log("Server Started Successfully");
