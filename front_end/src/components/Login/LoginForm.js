@@ -41,7 +41,7 @@ const LoginForm = () => {
         email,
         pass,
       });
-      //await axios.get('http://localhost:8000/individual',{ withCredentials: true });
+        //await axios.get('http://localhost:8000/individual',{ withCredentials: true });
 
       if (response.status === 200) {
         setTimeout(() => {
@@ -50,9 +50,9 @@ const LoginForm = () => {
          
          
         }, 4000);
-       setTimeout(() => {
+      /* setTimeout(() => {
           navigate("/individual");
-        }, 10000);
+        }, 10000);*/
       }
     } catch (error) {
       setTimeout(() => {

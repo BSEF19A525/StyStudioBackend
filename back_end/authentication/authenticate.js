@@ -7,16 +7,16 @@ const cors = require("cors");
 
 
 
-  app.use(cookieParser());
+  //app.use(cookieParser());
   app.use(cors({
     origin: 'http://localhost:3000', 
-    allowedHeaders: 'Content-Type, Authorization',
     credentials: true, // cookies to be included in the request
   }));
 
 const Authenticate = async (req,res,next) =>{
     try{
        
+        console.log("request body:", req.body);
         console.log("inside authenticate");
         console.log(req.cookies);
         const token = req.cookies.jwtoken;
