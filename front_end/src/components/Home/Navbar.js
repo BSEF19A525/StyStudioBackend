@@ -4,12 +4,27 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
 
 
 function Navbar() {
-  
+  const cookie = new Cookies();
+  const [user,setUser] = useState(null);
   const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
-
+  const getUserData = async () =>{
+          const res = await fetch('' ,{
+            method : "GET",
+            headers : {
+              Accept : "application/json",
+              "Content-Type": "application/json"
+            },
+            credentials: "include"
+          })
+  } 
+  useEffect(() =>{
+      getUserData();
+  },[]);
   const location = useLocation();
  
 
@@ -49,11 +64,8 @@ function Navbar() {
       const response = await axios.get('http://localhost:8000/logout', { withCredentials: true });
 
       if (response.status === 200) {
-        // Logout successful
         console.log('User logged out');
-        // Perform any additional actions after logout
       } else {
-        // Handle logout failure
         console.log('Logout failed');
       }
     } catch (error) {
@@ -93,7 +105,7 @@ function Navbar() {
                     </NavLink>
                   </li>
                   <li>
-                     {/* {user.username}*/}
+                     {}
                   </li>
 
                   <li>
