@@ -26,6 +26,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
+        <Route path="/logout" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -33,6 +34,9 @@ const App = () => {
         <Route path="/Book" element={<Booking />} />
         <Route path="/individual/:id" element={<Individual />} />
         <Route exact="true" path="/individual" element={<Individual />} />
+       
+
+
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
     </>

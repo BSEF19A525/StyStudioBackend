@@ -10,7 +10,6 @@ const LoginForm = () => {
     email: "",
     pass: "",
   });
-  const [user, setUser] = useState({ username: '', loggedIn: false });
 
   const navigate = useNavigate(null);
 
@@ -47,12 +46,8 @@ const LoginForm = () => {
         setTimeout(() => {
           
           toast.success("Login Successfull");
-          const data = response.data;
-          console.log(data);
-          const loggedInUser = {username : data.username, loggedIn: data.loggedIn}
-          console.log("User state object : ", loggedInUser);
-          console.log("username is : ", data.username);
-          setUser(loggedInUser);
+          
+         
         }, 4000);
         setTimeout(() => {
           navigate("/individual");
@@ -75,7 +70,6 @@ const LoginForm = () => {
 
   return (
     <>
-    <Navbar user = {user}></Navbar>
       <div className="Login-Wrapper">
         <div className="login-sideImg"></div>
         <div className="loginForm">

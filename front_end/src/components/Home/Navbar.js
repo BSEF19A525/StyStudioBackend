@@ -4,9 +4,8 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
 
-
-function Navbar({user}) {
-  console.log("User is now in Navbar Component", user);
+function Navbar() {
+  
   const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
 
   const location = useLocation();
@@ -80,8 +79,9 @@ function Navbar({user}) {
                   <li>
                      {/* {user.username}*/}
                   </li>
+
                   <li>
-                    <NavLink to="/logout"> Log Out</NavLink>
+                    <NavLink to="/logout"> LogOut</NavLink>
                   </li>
                   <li>
                     <NavLink to="/login">Login</NavLink>

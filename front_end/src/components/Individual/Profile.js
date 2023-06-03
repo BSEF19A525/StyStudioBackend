@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useEffect , useState, useHistory} from "react";
 import profile from "../../assets/salon_profile.jpg";
+
 const Profile = () => {
+  
+  /*  const [userData, setUserData] = useState({});
+  const callIndividualPage = async ()=>{
+    try{
+      const res = await fetch('/individual', {
+        method : "GET",
+        headers:{
+             Accept: "application/json",
+             "Content-Type": "application/json"
+        },
+        credentials: "include"
+       });
+
+       const data = await res.json();
+       console.log(data);
+       setUserData(data);
+
+       if(res.status !== 200){
+         const err = new Error(res.error);
+         throw err;
+       }
+    }
+    catch(err){
+      console.log(err);
+      history.push("/login");
+
+    }
+  }
+  useEffect(()=>{
+    callIndividualPage();
+  },[])
+  */
   return (
     <>
       <div className="profile-outer">
@@ -10,8 +43,8 @@ const Profile = () => {
               <img src={profile} alt="Profile" />
             </div>
             <div className="profile-content cont-width ">
-              <p>Welcome To</p>
-              <div className="title">StyStudio</div>
+              <p>Welcome </p>
+              <div className="title">{/*userData.username*/}</div>
               <div className="text">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -5,14 +5,15 @@ const app = express();
 const multer = require("multer");
 const connectDB = require("./connection/connection");
 const SalonOwner = require("./models/ownerSchema");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const router = express.Router();
+const authenticate = require("./authentication/authenticate");
 
 connectDB();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+app.use(router);
 
 // Middleware to parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }));
@@ -20,15 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // middleware to allow different ports to share data
 app.use(cors());
 
-app.use(cookieParser());
 
-// middleware for session management
-app.use(session({
-  resave:true, //forces the session to be saved back at session store
-  saveUninitialized:true, //forces an uninitialized session to be saved at session store
-  secret: "secret"  //used to sign the session's Cookie Id
-})
-);
 
 const upload = multer({ dest: "public/uploads/" });
 // Signup
@@ -72,19 +65,9 @@ app.post("/login", async (req, res) => {
     const user = await SalonOwner.findOne({ email: email });
     
     if (user && user.pass == pass) {
-      //user logged in, validating session
-      /*req.session.user = req.body;
-      console.log("req.session.user");
-      console.log(req.session.user);
-      // saving the session
-      req.session.save();
-      console.log("session saved");
-      console.log(req.session.loggedIn);
-      console.log(req.session.user);
-      res.status(200).json({loggedIn : true, username: user.username, msg: "Login Successfull"});
-      console.log("response has been shared");*/
+      
       const token = await user.generateAuthToken();
-      res.cookie("jwtoken",token,{
+      res.cookie("mytoken",token,{
         expires: new Date(Date.now() + 25892000000),
         httpOnly:true
       })
@@ -101,12 +84,13 @@ app.post("/login", async (req, res) => {
 app.get("/logout", (req,res) =>{
   
   try{
-  req.session.destroy();
-  console.log("session destroyed successfully")
-  res.status(200).json({msg: "User logged out successfully"});
+    console.log("Inside the logout page");
+    res.clearCookie('mytoken',{path: '/'});
+    res.status(200).send("User logged out");
+  
   }
   catch(error){
-    res.status(500).json({msg: "Internal Server Error"});
+    console.log(error);
   }
 })
 // app.get("/api/data", async (req, res) => {
@@ -184,6 +168,11 @@ app.get("/api/data/:location", async (req, res) => {
   }
 });
 
+
+router.get('/individual',authenticate,(req,res)=>{
+  console.log("Inside Individual page");
+  res.send(req.rootUser);
+})
 app.listen(8000, () => {
   console.log("Server Started Successfully");
 });
