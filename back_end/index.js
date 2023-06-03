@@ -19,7 +19,10 @@ app.use(router);
 app.use(express.urlencoded({ extended: true }));
 
 // middleware to allow different ports to share data
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true, // cookies to be included in the request
+}));
 
 
 
@@ -87,7 +90,7 @@ app.get("/logout", (req,res) =>{
     console.log("Inside the logout page");
     res.clearCookie('mytoken',{path: '/'});
     res.status(200).send("User logged out");
-  
+    console.log("logged out successfully");  
   }
   catch(error){
     console.log(error);

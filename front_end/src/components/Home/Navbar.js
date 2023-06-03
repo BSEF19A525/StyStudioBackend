@@ -3,14 +3,15 @@ import logo from "../../assets/logo.png";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
+import axios from 'axios';
+
 
 function Navbar() {
   
   const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
 
   const location = useLocation();
-  
-
+ 
 
   useEffect(() => {
     if (location.pathname === "/gallery" || location.pathname === "/") {
@@ -43,7 +44,22 @@ function Navbar() {
       }
     }, 900);
   };
+   const handleLogout = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/logout', { withCredentials: true });
 
+      if (response.status === 200) {
+        // Logout successful
+        console.log('User logged out');
+        // Perform any additional actions after logout
+      } else {
+        // Handle logout failure
+        console.log('Logout failed');
+      }
+    } catch (error) {
+      console.error('An error occurred during logout:', error);
+    }
+  }
   return (
     <>
       <div className="top">
@@ -81,7 +97,7 @@ function Navbar() {
                   </li>
 
                   <li>
-                    <NavLink to="/logout"> LogOut</NavLink>
+                    <NavLink to="/logout" onClick={handleLogout}> LogOut</NavLink>
                   </li>
                   <li>
                     <NavLink to="/login">Login</NavLink>

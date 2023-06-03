@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
+//const crypto = require('crypto');
 
 const generateRandomSecretKey = () => {
   const secretKey = crypto.randomBytes(32).toString('hex');
@@ -51,7 +51,7 @@ const ownerSchema = new mongoose.Schema({
 
 ownerSchema.methods.generateAuthToken = async function(){
   try{
-    let token = jwt.sign({_id:this._id}, generateRandomSecretKey());
+    let token = jwt.sign({_id:this._id}, "Q68WR2IVEIV898skfbbsif8777we8rbkbfbfsiewbeuw932hjwe");
     this.tokens = this.tokens.concat({token : token});
     await this.save();
     return token;
