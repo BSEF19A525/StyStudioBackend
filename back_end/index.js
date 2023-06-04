@@ -8,23 +8,25 @@ const SalonOwner = require("./models/ownerSchema");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const authenticate = require("./authentication/authenticate");
+const cookieParser = require("cookie-parser");
 
 connectDB();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
-app.use(router);
+
 
 // Middleware to parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 // middleware to allow different ports to share data
 app.use(cors({
   origin: 'http://localhost:3000', 
+  //exposedHeaders: ['jwtoken'], // Expose the custom token header
   credentials: true, // cookies to be included in the request
 }));
 
-
+app.use(router);
 
 const upload = multer({ dest: "public/uploads/" });
 // Signup
@@ -60,7 +62,7 @@ app.post("/signup", upload.single("profileImg"), async (req, res) => {
 // Login
 app.post("/login", async (req, res) => {
   const { email, pass } = req.body;
-
+  console.log(req.body);
       
 
   try {
@@ -69,13 +71,22 @@ app.post("/login", async (req, res) => {
     
     if (user && user.pass == pass) {
       
-      const token = await user.generateAuthToken();
-      res.cookie("mytoken",token,{
+      const token = jwt.sign({username: user.username, _id: user._id}, 'Q68WR2IVEIV898skfbbsif8777we8rbkbfbfsiewbeuw932hjwe');
+      res.cookie("jwtoken",token,{
         expires: new Date(Date.now() + 25892000000),
-        httpOnly:true
+       // httpOnly:true,
+        //secure: false, // For HTTPS connections
+        sameSite: 'lax', // Allow cross-site access
+        path: '/', // Set the cookie to be accessible from the root path
       })
-      console.log("cookie saved successfully");
-      res.status(200).json({ msg: "Login Successfull" });
+      res.cookie("user",user.username,{
+        sameSite:'lax',
+        path:'/',
+      });
+      //console.log("cookie has been saved successfully : ",res.get('Set-Cookie'));
+     res.status(200).json({ msg: "Login Successfull" });
+      //res.redirect("/individual");
+
     } else {
       res.status(401).json({ msg: "Invalid Credentials" });
     }
@@ -87,10 +98,12 @@ app.post("/login", async (req, res) => {
 app.get("/logout", (req,res) =>{
   
   try{
-    console.log("Inside the logout page");
-    res.clearCookie('mytoken',{path: '/'});
+    //console.log("Inside the logout page");
+    res.clearCookie('jwtoken',{path: '/'});
+    res.clearCookie('user',{path: '/'});
     res.status(200).send("User logged out");
-    console.log("logged out successfully");  
+    //console.log("logged out successfully");  
+    //res.redirect("/");
   }
   catch(error){
     console.log(error);
@@ -174,8 +187,9 @@ app.get("/api/data/:location", async (req, res) => {
 
 router.get('/individual',authenticate,(req,res)=>{
   console.log("Inside Individual page");
-  res.send(req.rootUser);
+  console.log("Individual user : ", req.rootUser.username);
+  res.render('http://localhost:3000/individual',{name: req.rootUser.username});
 })
 app.listen(8000, () => {
-  console.log("Server Started Successfully");
+  console.log("The Server Started Successfully");
 });

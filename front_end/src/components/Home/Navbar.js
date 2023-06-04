@@ -4,27 +4,20 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
 import axios from 'axios';
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 
 
 function Navbar() {
-  const cookie = new Cookies();
-  const [user,setUser] = useState(null);
+  
+  const cookies = new Cookies();
+  const userName = cookies.get('user');
+  let firstName = "";
+  if(userName){
+  const nameParts = userName.split(" ");
+  firstName = nameParts[0];
+  }
   const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
-  const getUserData = async () =>{
-          const res = await fetch('' ,{
-            method : "GET",
-            headers : {
-              Accept : "application/json",
-              "Content-Type": "application/json"
-            },
-            credentials: "include"
-          })
-  } 
-  useEffect(() =>{
-      getUserData();
-  },[]);
   const location = useLocation();
  
 
@@ -62,15 +55,18 @@ function Navbar() {
    const handleLogout = async () => {
     try {
       const response = await axios.get('http://localhost:8000/logout', { withCredentials: true });
-
+      window.location.reload();
       if (response.status === 200) {
         console.log('User logged out');
+        
+
       } else {
         console.log('Logout failed');
       }
     } catch (error) {
       console.error('An error occurred during logout:', error);
     }
+    
   }
   return (
     <>
@@ -104,20 +100,24 @@ function Navbar() {
                       Contact
                     </NavLink>
                   </li>
-                  <li>
-                     {}
-                  </li>
-
-                  <li>
-                    <NavLink to="/logout" onClick={handleLogout}> LogOut</NavLink>
-                  </li>
+                {userName ?(
+                <>
+                <li>
+                   <NavLink>{firstName}</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/logout" onClick={handleLogout}> Logout</NavLink>
+                </li></>
+               
+                ):(
+                  <>
                   <li>
                     <NavLink to="/login">Login</NavLink>
                   </li>
                   <li>
                     <NavLink to="/signup">Register</NavLink>
-                  </li>
-                
+                  </li></>
+                )}
                 </ul>
               </div>
             </div>
@@ -128,6 +128,7 @@ function Navbar() {
                 closeMenu={closeMenu}
                 scrollBottom={scrollToBottom}
                 scrollToAbout={scrollToAbout}
+                handleLogout={handleLogout}
               />
             )}
           </div>

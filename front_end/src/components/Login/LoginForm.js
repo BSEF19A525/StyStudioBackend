@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
+
 const LoginForm = () => {
   const [loginDetails, setloginDetails] = useState({
     email: "",
@@ -40,18 +41,15 @@ const LoginForm = () => {
       const response = await axios.post("http://localhost:8000/login", {
         email,
         pass,
-      });
-        //await axios.get('http://localhost:8000/individual',{ withCredentials: true });
+      },{ withCredentials: true });
+       //await axios.get('http://localhost:8000/individual',{ withCredentials: true });
 
       if (response.status === 200) {
         setTimeout(() => {
-          console.log("response : ", response);
           toast.success("Login Successfull");
-         
-         
         }, 4000);
-         setTimeout(() => {
-          navigate("/individual");
+        setTimeout(() => {
+          navigate("/individual", { withCredentials: true });
         }, 10000);
       }
     } catch (error) {
