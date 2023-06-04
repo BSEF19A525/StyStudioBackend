@@ -72,8 +72,8 @@ function Footer() {
           </div>
           <div className="footerdata fsec-w">
             <h2 className="bold">Get in touch</h2>
-            <p>Stystudio@example.com</p>
-            <p>777-123-4567</p>
+            <p><a href="mailto:stystudio@example.com">Stystudio@example.com</a></p>
+            <p><a href="tel:777-123-4567">777-123-4567</a></p>
           </div>
           <div className="footerdata fsec-w">
             <h2 className="bold">Get the latest news</h2>

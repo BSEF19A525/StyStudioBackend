@@ -442,6 +442,11 @@ body {
 .footerdata p {
   margin-bottom: 10px;
   font-weight: 800;
+  cursor: pointer;
+}
+.footerdata a{
+  color: black;
+  text-decoration: none;
 }
 .footerdata button {
   padding: 10px;

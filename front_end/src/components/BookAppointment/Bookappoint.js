@@ -82,7 +82,7 @@ function Bookappoint() {
     // Phone Number Validity
     if (phone.length < 12 && phone.length >= 9) {
       // Date Validity --> No Past Date allowed
-      if (bookingDate != -1) {
+      if (bookingDate !== -1) {
         // Service Validity --> Only Alphabets, whitespace character, including spaces, tabs, and line breaks.
         const alphabetsRegex = /^[A-Za-z\s]+$/;
         if (alphabetsRegex.test(service)) {
