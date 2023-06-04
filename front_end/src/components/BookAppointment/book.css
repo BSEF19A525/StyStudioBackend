@@ -117,15 +117,8 @@
     margin-bottom: 12px;
   }
 }
-@media (max-width: 330px) {
-  .form0{
-    width: 130px;
+@media (max-width: 525px) {
+  .bookForm {
+    height: auto;
   }
-  }
-@media (max-width: 280px) {
-.form0{
-  width: 180px;
-  margin-left: -80px;
 }
-}
-
