@@ -15,7 +15,7 @@ function Home() {
       </section>
       <HomeGallery />
       <Testimonials />
-      <Bookandregister/>
+      <Bookandregister />
     </>
   );
 }

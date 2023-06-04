@@ -174,9 +174,8 @@ body {
 .salonsdata {
   display: flex;
   justify-content: center;
-  background-color: #96ad90;
-  /* height: 35%; */
-  /* height: 36vh; */
+
+  margin-top: -10rem;
 }
 .btngallery {
   display: flex;
@@ -191,6 +190,11 @@ body {
   font-size: 18px;
   margin: auto;
   margin-bottom: 30px;
+}
+.green-bg {
+  height: 180px;
+  background-color: #96ad90;
+  margin-top: -36px;
 }
 .salongal {
   display: flex;
@@ -211,7 +215,6 @@ body {
   height: 100%;
 }
 .upbtn {
-  margin-top: 100px;
   cursor: pointer;
 }
 .upbtns {
@@ -574,6 +577,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
   }
+
   .galimg {
     width: 40%;
   }
@@ -617,6 +621,7 @@ body {
   .test-margin {
     margin-top: 20rem;
   }
+
   .weleyes {
     width: 350px;
     height: 350px;
@@ -633,13 +638,15 @@ body {
   }
   .salonsdata {
     background-color: transparent;
+    margin-top: -9rem;
   }
   .galimg {
     width: 100%;
     margin: 20px;
   }
-  .btngallery {
-    display: none;
+  .upbtn {
+    cursor: pointer;
+    margin: 3rem 0 6rem;
   }
   .galimg .img-style {
     width: 100%;

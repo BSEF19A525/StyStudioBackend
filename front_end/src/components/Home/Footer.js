@@ -8,7 +8,11 @@ function Footer() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/gallery" || location.pathname === "/") {
+    if (
+      location.pathname === "/gallery" ||
+      location.pathname === "/" ||
+      location.pathname === "/book"
+    ) {
       setScrollToAboutOnLoad(true);
     }
   }, [location.pathname]);

@@ -54,22 +54,15 @@ function Bookappoint() {
     }
   };
 
-  // const alphaOnly = (e) => {
-  //   let key = e.keyCode;
-  //   // 65 - 97  ==> A to Z
-  //   // 97 - 122 ==> a to z
-  //   // 8  --> ASCII Code for back space
-  //   // 32 --> ASCII Code
-
-  //   if (
-  //     (key >= 65 && key <= 90) ||
-  //     (key >= 97 && key <= 122) ||
-  //     key == 8 ||
-  //     key == 32
-  //   ) {
-  //     return key;
+  // phone Validation Function
+  // const validatePhone = (phone) => {
+  //   const phoneNum = phone.length;
+  //   if (phoneNum < 12 && phoneNum >= 9) {
+  //     return phoneNum;
   //   } else {
-  //     return -1;
+  //     toast.error("Phone Number Should range from 9 - 11 digits");
+  //     setBookData({ ...bookData, phone: "" });
+  //     .current.focus();
   //   }
   // };
 

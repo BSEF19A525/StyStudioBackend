@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import lines from "../../assets/curllines.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -36,6 +35,7 @@ const HomeGallery = () => {
             <h1>Here you can find</h1>
             <h3>The best salons in your area</h3>
           </div>
+          <div className="green-bg"></div>
           <div className="salonsdata">
             <div className="salongal">
               {data.slice(0, 3).map((item) => {
