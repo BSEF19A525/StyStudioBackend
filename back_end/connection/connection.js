@@ -6,7 +6,7 @@ const DB =
 const connectDB = async () => {
   try {
     const response = await mongoose.connect(DB);
-    console.log("Successfully Connected to MongoDB");
+    console.log("Successfully Connected to MongoDB Atlas");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   }

@@ -45,14 +45,14 @@ const LoginForm = () => {
 
       if (response.status === 200) {
         setTimeout(() => {
-          
+          console.log("response : ", response);
           toast.success("Login Successfull");
          
          
         }, 4000);
-      /* setTimeout(() => {
+         setTimeout(() => {
           navigate("/individual");
-        }, 10000);*/
+        }, 10000);
       }
     } catch (error) {
       setTimeout(() => {
