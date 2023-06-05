@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import Cookies from "universal-cookie";
 
-const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout }) => {
+
+const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout ,handleLogout}) => {
+  const cookies = new Cookies();
+  const userName = cookies.get('user');
+  let firstName = "";
+  if(userName){
+  const nameParts = userName.split(" ");
+  firstName = nameParts[0];
+  }
   const location = useLocation();
 
   const handleLinkClick = () => {
@@ -61,6 +70,19 @@ const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout }) => {
               Contact
             </NavLink>
           </li>
+          {userName ?(
+                <>
+                <li>
+                
+                   <NavLink className="nav-link">{firstName}</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/logout" 
+                  className="nav-link"
+                  onClick={(handleLinkClick, handleLogout)}> Logout</NavLink>
+                </li></>
+               
+                ):(<>
           <li>
             <NavLink to="/login" className="nav-link" onClick={handleLinkClick}>
               Login
@@ -74,7 +96,7 @@ const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout }) => {
             >
               Register
             </NavLink>
-          </li>
+          </li></>)}
         </ul>
       </div>
     </>

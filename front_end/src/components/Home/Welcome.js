@@ -1,6 +1,5 @@
 import React from "react";
 import eyes from "../../assets/bgeyes.png";
-import lines from "../../assets/curllines.png";
 
 function Welcome() {
   return (

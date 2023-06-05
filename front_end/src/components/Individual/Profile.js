@@ -1,6 +1,14 @@
-import React from "react";
 import profile from "../../assets/salon_profile.jpg";
+import Cookies from "universal-cookie";
+
+
 const Profile = () => {
+
+        const cookies = new Cookies();
+        const userName = cookies.get('user');
+          
+  
+  
   return (
     <>
       <div className="profile-outer">
@@ -10,8 +18,8 @@ const Profile = () => {
               <img src={profile} alt="Profile" />
             </div>
             <div className="profile-content cont-width ">
-              <p>Welcome To</p>
-              <div className="title">StyStudio</div>
+              <p>Welcome </p>
+              <div className="title">{userName}</div>
               <div className="text">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.

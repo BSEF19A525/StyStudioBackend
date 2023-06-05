@@ -5,17 +5,28 @@ const app = express();
 const multer = require("multer");
 const connectDB = require("./connection/connection");
 const SalonOwner = require("./models/ownerSchema");
+const jwt = require("jsonwebtoken");
+const router = express.Router();
+const authenticate = require("./authentication/authenticate");
+const cookieParser = require("cookie-parser");
 
 connectDB();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
+
 // Middleware to parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 // middleware to allow different ports to share data
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  //exposedHeaders: ['jwtoken'], // Expose the custom token header
+  credentials: true, // cookies to be included in the request
+}));
+
+app.use(router);
 
 const upload = multer({ dest: "public/uploads/" });
 // Signup
@@ -51,12 +62,31 @@ app.post("/signup", upload.single("profileImg"), async (req, res) => {
 // Login
 app.post("/login", async (req, res) => {
   const { email, pass } = req.body;
+  console.log(req.body);
+      
 
   try {
+
     const user = await SalonOwner.findOne({ email: email });
-    console.log(user);
+    
     if (user && user.pass == pass) {
-      res.status(200).json({ msg: "Login Successfull" });
+      
+      const token = jwt.sign({username: user.username, _id: user._id}, 'Q68WR2IVEIV898skfbbsif8777we8rbkbfbfsiewbeuw932hjwe');
+      res.cookie("jwtoken",token,{
+        expires: new Date(Date.now() + 25892000000),
+       // httpOnly:true,
+        //secure: false, // For HTTPS connections
+        sameSite: 'lax', // Allow cross-site access
+        path: '/', // Set the cookie to be accessible from the root path
+      })
+      res.cookie("user",user.username,{
+        sameSite:'lax',
+        path:'/',
+      });
+      //console.log("cookie has been saved successfully : ",res.get('Set-Cookie'));
+     res.status(200).json({ msg: "Login Successfull" });
+      //res.redirect("/individual");
+
     } else {
       res.status(401).json({ msg: "Invalid Credentials" });
     }
@@ -65,6 +95,20 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/logout", (req,res) =>{
+  
+  try{
+    //console.log("Inside the logout page");
+    res.clearCookie('jwtoken',{path: '/'});
+    res.clearCookie('user',{path: '/'});
+    res.status(200).send("User logged out");
+    //console.log("logged out successfully");  
+    //res.redirect("/");
+  }
+  catch(error){
+    console.log(error);
+  }
+})
 // app.get("/api/data", async (req, res) => {
 //   try {
 //     const data = await SalonOwner.find();
@@ -140,6 +184,14 @@ app.get("/api/data/:location", async (req, res) => {
   }
 });
 
+
+// authenticating user 
+router.get('/individual',authenticate,(req,res)=>{
+  console.log("Inside Individual page");
+  console.log("Individual user : ", req.rootUser.username);
+  res.render('http://localhost:3000/individual',{name: req.rootUser.username});
+})
+
 // for fetching salon email based on name
 
 app.get("/book/:salonName", async (req, res) => {
@@ -178,6 +230,7 @@ app.get("/book/:salonName", async (req, res) => {
 //   }
 // });
 
+
 app.listen(8000, () => {
-  console.log("Server Started Successfully");
+  console.log("The Server Started Successfully");
 });

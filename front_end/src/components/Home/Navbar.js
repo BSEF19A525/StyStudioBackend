@@ -3,11 +3,23 @@ import logo from "../../assets/logo.png";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
+import axios from 'axios';
+import Cookies from "universal-cookie";
+
+
 
 function Navbar() {
+  
+  const cookies = new Cookies();
+  const userName = cookies.get('user');
+  let firstName = "";
+  if(userName){
+  const nameParts = userName.split(" ");
+  firstName = nameParts[0];
+  }
   const [scrollToAboutOnLoad, setScrollToAboutOnLoad] = useState(false);
-
   const location = useLocation();
+ 
 
   useEffect(() => {
     if (location.pathname === "/gallery" || location.pathname === "/") {
@@ -40,7 +52,22 @@ function Navbar() {
       }
     }, 900);
   };
+   const handleLogout = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/logout', { withCredentials: true });
+      window.location.reload();
+      if (response.status === 200) {
+        console.log('User logged out');
+        
 
+      } else {
+        console.log('Logout failed');
+      }
+    } catch (error) {
+      console.error('An error occurred during logout:', error);
+    }
+    
+  }
   return (
     <>
       <div className="top">
@@ -73,12 +100,24 @@ function Navbar() {
                       Contact
                     </NavLink>
                   </li>
+                {userName ?(
+                <>
+                <li>
+                   <NavLink>{firstName}</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/logout" onClick={handleLogout}> Logout</NavLink>
+                </li></>
+               
+                ):(
+                  <>
                   <li>
                     <NavLink to="/login">Login</NavLink>
                   </li>
                   <li>
                     <NavLink to="/signup">Register</NavLink>
-                  </li>
+                  </li></>
+                )}
                 </ul>
               </div>
             </div>
@@ -89,6 +128,7 @@ function Navbar() {
                 closeMenu={closeMenu}
                 scrollBottom={scrollToBottom}
                 scrollToAbout={scrollToAbout}
+                handleLogout={handleLogout}
               />
             )}
           </div>
