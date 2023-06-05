@@ -15,16 +15,17 @@ connectDB();
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
-
 // Middleware to parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // middleware to allow different ports to share data
-app.use(cors({
-  origin: 'http://localhost:3000', 
-  //exposedHeaders: ['jwtoken'], // Expose the custom token header
-  credentials: true, // cookies to be included in the request
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    //exposedHeaders: ['jwtoken'], // Expose the custom token header
+    credentials: true, // cookies to be included in the request
+  })
+);
 
 app.use(router);
 
@@ -63,30 +64,37 @@ app.post("/signup", upload.single("profileImg"), async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, pass } = req.body;
   console.log(req.body);
-      
 
   try {
-
     const user = await SalonOwner.findOne({ email: email });
-    
-    if (user && user.pass == pass) {
-      
-      const token = jwt.sign({username: user.username, _id: user._id}, 'Q68WR2IVEIV898skfbbsif8777we8rbkbfbfsiewbeuw932hjwe');
-      res.cookie("jwtoken",token,{
-        expires: new Date(Date.now() + 25892000000),
-       // httpOnly:true,
-        //secure: false, // For HTTPS connections
-        sameSite: 'lax', // Allow cross-site access
-        path: '/', // Set the cookie to be accessible from the root path
-      })
-      res.cookie("user",user.username,{
-        sameSite:'lax',
-        path:'/',
-      });
-      //console.log("cookie has been saved successfully : ",res.get('Set-Cookie'));
-     res.status(200).json({ msg: "Login Successfull" });
-      //res.redirect("/individual");
 
+    if (user && user.pass == pass) {
+      const token = jwt.sign(
+        { username: user.username, _id: user._id },
+        "Q68WR2IVEIV898skfbbsif8777we8rbkbfbfsiewbeuw932hjwe"
+      );
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 25892000000),
+        // httpOnly:true,
+        //secure: false, // For HTTPS connections
+        sameSite: "lax", // Allow cross-site access
+        path: "/", // Set the cookie to be accessible from the root path
+      });
+      res.cookie("user", user.username, {
+        sameSite: "lax",
+        path: "/",
+      });
+      // console.log(
+      //   "cookie has been saved successfully : ",
+      //   res.get("Set-Cookie")
+      // );
+      res.status(200).json({ msg: "Login Successfull" });
+      // this below line is causing app crash because we are sending multiple responses for same request
+      // 1st one ---> Login msg
+      // 2nd one ---> redirecting towards another page
+      // so their is a conflict here
+
+      // res.redirect("/individual");  // I have commented this line, better approach is to handle redirection based on client-side (react)
     } else {
       res.status(401).json({ msg: "Invalid Credentials" });
     }
@@ -95,20 +103,18 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/logout", (req,res) =>{
-  
-  try{
+app.get("/logout", (req, res) => {
+  try {
     //console.log("Inside the logout page");
-    res.clearCookie('jwtoken',{path: '/'});
-    res.clearCookie('user',{path: '/'});
+    res.clearCookie("jwtoken", { path: "/" });
+    res.clearCookie("user", { path: "/" });
     res.status(200).send("User logged out");
-    //console.log("logged out successfully");  
-    //res.redirect("/");
-  }
-  catch(error){
+    console.log("logged out successfully");
+    // res.redirect("/");
+  } catch (error) {
     console.log(error);
   }
-})
+});
 // app.get("/api/data", async (req, res) => {
 //   try {
 //     const data = await SalonOwner.find();
@@ -184,13 +190,19 @@ app.get("/api/data/:location", async (req, res) => {
   }
 });
 
+// authenticating user
+// router.get("/individual", authenticate, (req, res) => {
+//   // console.log("Inside Individual page");
+//   // console.log("Individual user : ", req.rootUser.username);
+//   res.send("http://localhost:3000/individual", {
+//     name: req.rootUser.username,
+//   });
+// });
 
-// authenticating user 
-router.get('/individual',authenticate,(req,res)=>{
-  console.log("Inside Individual page");
-  console.log("Individual user : ", req.rootUser.username);
-  res.render('http://localhost:3000/individual',{name: req.rootUser.username});
-})
+// Ali Malik Code
+router.get("/individual", authenticate, (req, res) => {
+  res.json({ name: req.rootUser.username });
+});
 
 // for fetching salon email based on name
 
@@ -229,7 +241,6 @@ app.get("/book/:salonName", async (req, res) => {
 //     res.status(500).json({ msg: "Internal Server Error" });
 //   }
 // });
-
 
 app.listen(8000, () => {
   console.log("The Server Started Successfully");

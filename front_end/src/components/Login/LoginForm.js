@@ -4,7 +4,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
-
 const LoginForm = () => {
   const [loginDetails, setloginDetails] = useState({
     email: "",
@@ -27,43 +26,111 @@ const LoginForm = () => {
   const inputRef = useRef(null);
 
   // onSubmit
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   toast.loading("Loading...");
+  //   setTimeout(() => {
+  //     toast.dismiss();
+  //   }, 3000);
+
+  //   const { email, pass } = loginDetails;
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8000/login",
+  //       {
+  //         email,
+  //         pass,
+  //       },
+  //       { withCredentials: true }
+  //     );
+  //     await axios.get("http://localhost:8000/individual", {
+  //       withCredentials: true,
+  //     });
+
+  //     if (response.status === 200) {
+  //       setTimeout(() => {
+  //         toast.success("Login Successfull");
+  //       }, 2000);
+  //       setTimeout(() => {
+  //         navigate("/individual", { withCredentials: true });
+  //       }, 3000);
+  //     }
+  //   } catch (error) {
+  //     setTimeout(() => {
+  //       setloginDetails({
+  //         email: "",
+  //         pass: "",
+  //       });
+  //       toast.error("Invalid Credentials, Please Try Again", {
+  //         onClose: () => {
+  //           inputRef.current.focus();
+  //         },
+  //       });
+  //     }, 4000);
+  //   }
+  // };
+
+  // Ali Malik Code
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     toast.loading("Loading...");
-    setTimeout(() => {
-      toast.dismiss();
-    }, 3000);
-
-    const { email, pass } = loginDetails;
 
     try {
-      const response = await axios.post("http://localhost:8000/login", {
-        email,
-        pass,
-      },{ withCredentials: true });
-       //await axios.get('http://localhost:8000/individual',{ withCredentials: true });
+      const { email, pass } = loginDetails;
+
+      const response = await axios.post(
+        "http://localhost:8000/login",
+        {
+          email,
+          pass,
+        },
+        { withCredentials: true }
+      );
 
       if (response.status === 200) {
-        setTimeout(() => {
-          toast.success("Login Successfull");
-        }, 4000);
-        setTimeout(() => {
-          navigate("/individual", { withCredentials: true });
-        }, 10000);
+        toast.success("Login Successful");
+
+        // Make the API call to authenticate the user
+        const authenticateResponse = await axios.get(
+          "http://localhost:8000/individual",
+          {
+            withCredentials: true,
+          }
+        );
+
+        if (authenticateResponse.status === 200) {
+          toast.dismiss();
+
+          // Move the user to the individual page
+          // console.log("User authenticated");
+          navigate("/individual", {
+            state: { user: authenticateResponse.data },
+          });
+          console.log(authenticateResponse);
+        } else {
+          // throw new Error("User authentication failed");
+          console.log("User Authentication Failed");
+        }
+      } else {
+        // throw new Error("Invalid response from the server");
+        console.log("Invalid response from the server");
       }
     } catch (error) {
-      setTimeout(() => {
-        setloginDetails({
-          email: "",
-          pass: "",
-        });
-        toast.error("Invalid Credentials, Please Try Again", {
-          onClose: () => {
-            inputRef.current.focus();
-          },
-        });
-      }, 4000);
+      setloginDetails({
+        email: "",
+        pass: "",
+      });
+
+      toast.error("Invalid Credentials, Please Try Again", {
+        onClose: () => {
+          inputRef.current.focus();
+        },
+      });
+    } finally {
+      toast.dismiss();
     }
   };
 
