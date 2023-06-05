@@ -185,11 +185,52 @@ app.get("/api/data/:location", async (req, res) => {
 });
 
 
+// authenticating user 
 router.get('/individual',authenticate,(req,res)=>{
   console.log("Inside Individual page");
   console.log("Individual user : ", req.rootUser.username);
   res.render('http://localhost:3000/individual',{name: req.rootUser.username});
 })
+
+// for fetching salon email based on name
+
+app.get("/book/:salonName", async (req, res) => {
+  let { salonName } = req.params;
+  salonName = new RegExp(`^${salonName}$`, "i"); // Case-insensitive regular expression
+
+  console.log(salonName);
+
+  try {
+    const salon = await SalonOwner.findOne({ salonName });
+    if (!salon) {
+      return res.status(404).json({ msg: "No Such Salon" });
+    }
+
+    res.status(200).json(salon);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+// app.get("/book/:salonName", async (req, res) => {
+//   const { salonName } = req.params;
+//   console.log(salonName);
+
+//   try {
+//     const salon = await SalonOwner.find({ salonName });
+//     if (!salon) {
+//       res.status(404).json({ msg: "No Such Salon" });
+//     }
+//     // const salonsData = salon.data;
+//     res.status(200).json(salon);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ msg: "Internal Server Error" });
+//   }
+// });
+
+
 app.listen(8000, () => {
   console.log("The Server Started Successfully");
 });

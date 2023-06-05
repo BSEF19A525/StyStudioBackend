@@ -83,7 +83,7 @@ function Navbar() {
               <div className="menuflex">
                 <ul>
                   <li>
-                    <NavLink exact to="/">
+                    <NavLink exact="true" to="/">
                       Home
                     </NavLink>
                   </li>

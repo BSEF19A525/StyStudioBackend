@@ -13,17 +13,19 @@
 .side-img0 {
   background-image: url("../../assets/rectangle-1@3x.png");
   background-size: cover;
-  width: 40%;
+  width: 30vw;
 }
 /* ALI MALIK */
 .bookForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 10px 10px 0px;
   background: white;
-  /* width: 600px; */
-  width: 40%;
+  width: 40vw;
   height: 80vh;
-  padding: 40px 100px;
+  padding: 40px;
 }
-
 .title0 {
   color: #3d5054;
   font-family: "Roboto", sans-serif;
@@ -45,13 +47,15 @@
   border-color: #3d5054;
   border-width: 1px;
 }
-.salImg0{
+.salImg0 {
   display: none;
 }
 .flex-com0 {
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
+  /* margin-bottom: 10px; */
+  flex-wrap: wrap;
 }
 .sal-common0 {
   margin-top: 12px;
@@ -77,84 +81,44 @@
   width: 48%;
 }
 /*          ////////////////////////      responsive             ///////////////////////////////////  */
-@media (max-width: 1024px) {
-  .form0{
-    margin-top: -2rem;
-  }
-  .title0{
+@media (max-width: 912px) {
+  .title0 {
     font-size: 28px;
   }
-  .flex-com0{
-    flex-wrap: wrap;
+  .side-img0 {
+    display: none;
   }
-  .flex-com0 input{
-    width: 100%;
-    margin-bottom: 6px;
+  .bookForm {
+    border-radius: 5px;
+    width: auto;
+    height: 72vh;
+    padding: 40px 80px;
   }
-}
-@media (max-width: 912px) {
-  .form0{
-    margin-top: -2rem;
-  }
-  .bookForm{
-    background-image: url("../../assets/rectangle-1@3x.png");
-    width: 80%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin: auto;
-    height: 70vh;
-  }
-  .book-Wrapper{
-    display: block;
-  }
-  .form0{
-    margin-top: 0px;
-  }
-}
-@media (max-width: 540px) {
-  .form0{
-    margin-top: 10px;
-  }
-}
-@media (max-width: 414px) {
-  .flex-com0{
-    flex-wrap: wrap;
-  }
-  .flex-com0 input{
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .form0{
-    width: 145%;
-    margin-left: -40px;
-    margin-top: -44px;
-  }
-  .flex-com0,.flex-com0 input,.sal-common0{
-    margin-top: 2px;
-    margin-bottom: 2px;
-  }
-}
-@media (max-width: 375px) {
-  .bookForm{
-    height: 60vh;
-  }
-  .form0{
-    width: 190%;
-  }
-  .title0{
-    font-size: 22px;
-  }
-}
-@media (max-width: 330px) {
-  .form0{
-    width: 130px;
-  }
-  }
-@media (max-width: 280px) {
-.form0{
-  width: 180px;
-  margin-left: -80px;
-}
 }
 
+@media (max-width: 576px) {
+  .flex-com0 input {
+    width: 100%;
+  }
+  .bookForm {
+    height: 85vh;
+    width: 85vw;
+  }
+  .bookForm {
+    padding: 40px;
+  }
+  .flex-com0 {
+    margin: unset;
+  }
+  .sal-common0 {
+    margin: unset;
+  }
+  .margin {
+    margin-bottom: 12px;
+  }
+}
+@media (max-width: 525px) {
+  .bookForm {
+    height: auto;
+  }
+}
