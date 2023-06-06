@@ -18,8 +18,19 @@ const Profile = () => {
               <img src={profile} alt="Profile" />
             </div>
             <div className="profile-content cont-width ">
-              <p>Welcome </p>
-              <div className="title">{userName}</div>
+              
+              {userName ? (
+                <>
+                <p>Welcome </p>
+                 <div className="title">{userName}</div>
+                 </>
+              ):(
+                <>
+                <p>Welcome To,</p>
+                <div className="title">StyStudio</div>
+                </>                            
+              )}
+            
               <div className="text">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.

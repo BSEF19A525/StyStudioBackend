@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cors = require("cors");
 const fs = require("fs");
 const express = require("express");
@@ -9,6 +10,9 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const authenticate = require("./authentication/authenticate");
 const cookieParser = require("cookie-parser");
+
+
+
 
 connectDB();
 
@@ -71,7 +75,7 @@ app.post("/login", async (req, res) => {
     if (user && user.pass == pass) {
       const token = jwt.sign(
         { username: user.username, _id: user._id },
-        "Q68WR2IVEIV898skfbbsif8777we8rbkbfbfsiewbeuw932hjwe"
+        process.env.JWT_SECRET
       );
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 25892000000),
@@ -108,9 +112,13 @@ app.get("/logout", (req, res) => {
     //console.log("Inside the logout page");
     res.clearCookie("jwtoken", { path: "/" });
     res.clearCookie("user", { path: "/" });
-    res.status(200).send("User logged out");
+   // res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    //res.header('Pragma', 'no-cache');
+    //res.header('Expires', '0');
     console.log("logged out successfully");
-    // res.redirect("/");
+    res.status(200).send("User logged out");
+    
+
   } catch (error) {
     console.log(error);
   }
