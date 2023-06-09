@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const user = require("../models/ownerSchema");
 const express = require("express");
@@ -16,11 +16,8 @@ app.use(
 const Authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.jwtoken;
-   // console.log("token fetched from cookie : ", token);
-    const verifyToken = jwt.verify(
-      token,
-      process.env.JWT_SECRET
-      );
+    // console.log("token fetched from cookie : ", token);
+    const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
     const rootUser = await user.findOne({ _id: verifyToken._id });
     if (!rootUser) {
       throw new Error("User not Found"); /*"tokens.token" :token*/

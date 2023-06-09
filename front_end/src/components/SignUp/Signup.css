@@ -88,10 +88,10 @@ form input {
   text-align: center;
   display: flex;
   justify-content: center;
-  height: 154px;
+  height: 110px;
   align-items: center;
   padding: 40px;
-  width: 40%;
+  width: 43%;
   color: #818181;
 }
 .text-desc {
@@ -106,7 +106,7 @@ form input {
   width: 100%;
   margin-top: 10px;
   outline: none;
-  height: 145px;
+  height: 100px;
   padding: 10px;
 }
 .sub-btn button {
@@ -126,8 +126,8 @@ form input {
   font-size: 12px;
 }
 .prev-img {
-  height: 150px;
-  width: 140px;
+  height: 100px;
+  width: 100px;
   object-fit: contain;
 }
 
@@ -145,14 +145,10 @@ form input {
   cursor: pointer;
 }
 /*          ////////////////////////      responsive             ///////////////////////////////////  */
-@media (max-width: 1024px) {
-  .form {
-    margin-top: -2rem;
-  }
-}
+
 @media (max-width: 912px) {
-  .form {
-    margin-top: -2rem;
+  .side-img {
+    background-image: unset;
   }
   .signUpForm {
     background-image: url("../../assets/signup.jpg");
@@ -160,7 +156,7 @@ form input {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 100vh;
+    height: auto;
   }
   .signUp-Wrapper {
     display: block;
@@ -171,27 +167,17 @@ form input {
   .salon-img {
     background-color: white;
   }
-  .navtoLog,
-  .moveToLogin,
-  .form p {
-    font-size: 24px;
-  }
-}
-@media (max-width: 540px) {
   .form {
-    margin-top: 10px;
-  }
-  .form p {
-    font-size: 12px;
-  }
-  .navtoLog,
-  .moveToLogin {
-    font-size: 14px;
+    background: white;
+    padding: 50px 60px;
+    border-radius: 5px;
   }
 }
-@media (max-width: 414px) {
+
+@media (max-width: 576px) {
   .flex-com {
     flex-wrap: wrap;
+    margin-top: unset;
   }
   .flex-com input {
     width: 100%;
@@ -202,50 +188,17 @@ form input {
   }
   .short-desc {
     width: 100%;
-    margin-top: 0rem;
+    /* margin-top: 0rem; */
   }
   .salon-img,
   .short-desc textarea {
     width: 100%;
-    height: 80px;
   }
-  .form {
-    width: 145%;
-    margin-left: -40px;
-    margin-top: -44px;
-  }
-  .flex-com,
-  .flex-com input,
-  .sal-common,
-  .img_desc {
-    margin-top: 2px;
-    margin-bottom: 2px;
-  }
-  .short-desc {
-    margin-bottom: 12px;
-  }
-  .form p {
-    font-size: 8px;
-    font-weight: bolder;
-  }
-}
-@media (max-width: 393px) {
-  .navtoLog,
-  .moveToLogin {
-    font-size: 18px;
-  }
-}
-@media (max-width: 375px) {
   .signUpForm {
-    height: 114vh;
+    padding: 40px;
   }
-}
-@media (max-width: 280px) {
-  .form {
-    width: 200px;
-    margin-left: -59px;
-  }
-  .form p {
-    color: white;
+  .sal-common {
+    margin-top: unset;
+    margin-bottom: 10px;
   }
 }

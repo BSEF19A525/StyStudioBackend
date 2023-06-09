@@ -14,14 +14,15 @@
   background-image: url("../../assets/login.jpg");
   background-size: cover;
   width: 57vw;
+  height: 100vh;
 }
 
 /* ALI MALIK */
-.loginForm {
+.loginForm-outer {
   background: white;
   width: 600px;
   height: 100vh;
-  padding: 70px 100px;
+  padding: 100px;
 }
 
 .title {
@@ -31,10 +32,10 @@
   letter-spacing: 0.5px;
 }
 /* margin from top of screen */
-.form {
+.loginForm {
   margin-top: 1rem;
 }
-.form p {
+.loginForm p {
   color: #818181;
   font-size: 13px;
   letter-spacing: 0.5px;
@@ -53,8 +54,6 @@ form {
   margin: 12px 0px;
 }
 .forget-pass {
-  text-align: right;
-  width: 82%;
   border: none;
   margin-top: 12px;
 }
@@ -83,7 +82,6 @@ form {
 .navtoLog {
   font-size: 12px;
 }
-
 .moveToLogin {
   border: none;
   background: transparent;
@@ -92,4 +90,51 @@ form {
   font-weight: bold;
   color: #3d5054;
   cursor: pointer;
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+  .login-sideImg {
+    position: relative;
+    width: 100vw;
+  }
+
+  .loginForm-outer {
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 500px;
+    padding: 70px;
+    width: 60vw;
+  }
+  .loginsub-btn button {
+    width: 100%;
+  }
+  .login input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .loginForm-outer {
+    width: 66vw;
+  }
+}
+@media (max-width: 590px) {
+  .loginForm-outer {
+    width: 70vw;
+  }
+}
+@media (max-width: 520px) {
+  .loginForm-outer {
+    width: 73vw;
+  }
+}
+@media (max-width: 450px) {
+  .loginForm-outer {
+    width: 90vw;
+    padding: 60px 40px;
+  }
 }

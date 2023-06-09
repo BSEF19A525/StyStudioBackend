@@ -124,9 +124,9 @@ const SignUp = () => {
           <div className="backImg"></div>
           <div className="form">
             <h1 className="title">Register</h1>
-            <p>Register your account in seconds</p>
+            <p className="signUp-title">Register your account in seconds</p>
+            {/* Username & Email */}
             <form method="POST" onSubmit={handleSubmit}>
-              {/* Username & Email */}
               <div className="name-email flex-com">
                 <input
                   type="text"

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const cors = require("cors");
 const fs = require("fs");
 const express = require("express");
@@ -10,9 +10,6 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const authenticate = require("./authentication/authenticate");
 const cookieParser = require("cookie-parser");
-
-
-
 
 connectDB();
 
@@ -112,13 +109,11 @@ app.get("/logout", (req, res) => {
     //console.log("Inside the logout page");
     res.clearCookie("jwtoken", { path: "/" });
     res.clearCookie("user", { path: "/" });
-   // res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    // res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
     //res.header('Pragma', 'no-cache');
     //res.header('Expires', '0');
     console.log("logged out successfully");
     res.status(200).send("User logged out");
-    
-
   } catch (error) {
     console.log(error);
   }
@@ -249,6 +244,47 @@ app.get("/book/:salonName", async (req, res) => {
 //     res.status(500).json({ msg: "Internal Server Error" });
 //   }
 // });
+app.get("/changePass/:email", async (req, res) => {
+  let { email } = req.params;
+  // salonemail = new RegExp(`^${email}$`, "i"); // Case-insensitive regular expression
+
+  console.log(email);
+  try {
+    const salonmail = await SalonOwner.findOne({ email });
+    if (!salonmail) {
+      console.log("NO such data found");
+      return res.status(404).json({ msg: "No Such Data found" });
+    }
+    res.status(200).json(salonmail);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+//post new password in place of old password
+app.post("/changePass", async (req, res) => {
+  try {
+    const { email, newpass } = req.body;
+
+    // Retrieve the user from the database based on the email
+    const user = await SalonOwner.findOne({ email });
+    if (!user) {
+      // User not found
+      return res.status(404).json({ message: "User not found" });
+    }
+    // Assign the new password to the user
+    user.pass = newpass;
+    user.cpass = newpass;
+    // Save the updated user record back to the database
+    await user.save();
+    // Password updated successfully
+    return res.status(200).json({ message: "Password changed successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server error" });
+  }
+});
 
 app.listen(8000, () => {
   console.log("The Server Started Successfully");

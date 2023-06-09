@@ -25,53 +25,6 @@ const LoginForm = () => {
 
   const inputRef = useRef(null);
 
-  // onSubmit
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   toast.loading("Loading...");
-  //   setTimeout(() => {
-  //     toast.dismiss();
-  //   }, 3000);
-
-  //   const { email, pass } = loginDetails;
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8000/login",
-  //       {
-  //         email,
-  //         pass,
-  //       },
-  //       { withCredentials: true }
-  //     );
-  //     await axios.get("http://localhost:8000/individual", {
-  //       withCredentials: true,
-  //     });
-
-  //     if (response.status === 200) {
-  //       setTimeout(() => {
-  //         toast.success("Login Successfull");
-  //       }, 2000);
-  //       setTimeout(() => {
-  //         navigate("/individual", { withCredentials: true });
-  //       }, 3000);
-  //     }
-  //   } catch (error) {
-  //     setTimeout(() => {
-  //       setloginDetails({
-  //         email: "",
-  //         pass: "",
-  //       });
-  //       toast.error("Invalid Credentials, Please Try Again", {
-  //         onClose: () => {
-  //           inputRef.current.focus();
-  //         },
-  //       });
-  //     }, 4000);
-  //   }
-  // };
-
   // Ali Malik Code
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -138,10 +91,10 @@ const LoginForm = () => {
     <>
       <div className="Login-Wrapper">
         <div className="login-sideImg"></div>
-        <div className="loginForm">
-          <div className="form">
+        <div className="loginForm-outer">
+          <div className="loginForm">
             <h1 className="title">Login</h1>
-            <p>Please enter your login details to sign in</p>
+            <p>Please enter your login details</p>
             <form method="POST" onSubmit={handleSubmit} className="login">
               {/* Email & Passowrd */}
               <div className="mail">
@@ -149,6 +102,7 @@ const LoginForm = () => {
                   type="email"
                   ref={inputRef}
                   value={loginDetails.email}
+                  // autoComplete="off"
                   onChange={handleChange}
                   placeholder="Email Address"
                   name="email"
