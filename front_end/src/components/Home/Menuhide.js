@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faUser} from '@fortawesome/free-solid-svg-icons';
 
 
 const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout ,handleLogout}) => {
@@ -73,8 +75,8 @@ const Menuhide = ({ openSideBar, closeMenu, scrollBottom, scrollToAbout ,handleL
           {userName ?(
                 <>
                 <li>
-                
-                   <NavLink className="nav-link">{firstName}</NavLink>
+                <FontAwesomeIcon icon={faUser} />
+                <NavLink className="nav-link">{firstName}</NavLink>
                 </li>
                 <li>
                   <NavLink to="/logout" 

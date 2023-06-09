@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.png";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import Menuhide from "./Menuhide";
 import { scroller } from "react-scroll";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faUser} from '@fortawesome/free-solid-svg-icons';
+
 
 function Navbar() {
+
+
+  const navigate = useNavigate(null);
+
   const cookies = new Cookies();
   const userName = cookies.get("user");
   console.log("Cookies: " + userName);
@@ -51,6 +58,14 @@ function Navbar() {
       }
     }, 900);
   };
+
+  
+    const [showLogout,setShowLogout] = useState(false);
+    const handleIconClick = () =>{
+      setShowLogout(!showLogout);
+
+    
+  }
   const handleLogout = async () => {
     try {
       const response = await axios.get("http://localhost:8000/logout", {
@@ -61,6 +76,7 @@ function Navbar() {
 
       if (response.status === 200) {
         console.log("User logged out");
+        navigate("/");
       } else {
         console.log("Logout failed");
       }
@@ -101,18 +117,26 @@ function Navbar() {
                       Contact
                     </NavLink>
                   </li>
+                  
                   {userName ? (
-                    <>
+                    
+                    <div> 
                       <li>
-                        <NavLink>{firstName}</NavLink>
+                      <FontAwesomeIcon icon={faUser} /> {"    "} 
+                      <NavLink onClick={handleIconClick} style={{ marginLeft: '3px' }}>{firstName}</NavLink><br></br><br></br>
                       </li>
+                    
+                      {showLogout && (
+                      
                       <li>
                         <NavLink to="/logout" onClick={handleLogout}>
-                          {" "}
                           Logout
                         </NavLink>
                       </li>
-                    </>
+                      
+                      )}
+                      </div>
+                   
                   ) : (
                     <>
                       <li>
@@ -123,6 +147,7 @@ function Navbar() {
                       </li>
                     </>
                   )}
+                
                 </ul>
               </div>
             </div>
