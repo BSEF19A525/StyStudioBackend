@@ -17,6 +17,8 @@ const SignUp = () => {
   const [profileImg, setProfileImg] = useState(null);
   const [preview, setPreview] = useState("");
 
+  const [services, setServices] = useState([]);
+
   const inputRef = useRef(null);
 
   const navigate = useNavigate();
@@ -29,6 +31,18 @@ const SignUp = () => {
         [name]: value,
       };
     });
+  };
+
+  // for handling checkBox value
+  const handleCheckBoxChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setServices((prevServices) => [...prevServices, value]);
+    } else {
+      setServices((prevServices) =>
+        prevServices.filter((service) => service !== value)
+      );
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -46,8 +60,9 @@ const SignUp = () => {
         toast.dismiss();
       }, 3000);
     }
-    // data ko send krna or backend sy get krna
+    // checking which services user selected
 
+    // data ko send krna or backend sy get krna
     const { username, email, pass, cpass, salonName, location, description } =
       formData;
 
@@ -60,6 +75,8 @@ const SignUp = () => {
     form_Data.append("location", location);
     form_Data.append("description", description);
     form_Data.append("profileImg", profileImg);
+    // services that salon is providing
+    form_Data.append("services", JSON.stringify(services));
 
     if (pass === cpass) {
       try {
@@ -83,6 +100,7 @@ const SignUp = () => {
               location: "",
               description: "",
             });
+            setServices([]);
             setProfileImg(null);
           }, 4000);
           setTimeout(() => {
@@ -177,6 +195,60 @@ const SignUp = () => {
                   name="salonName"
                   required
                 />
+              </div>
+              {/* CheckBox  */}
+
+              <div className="choseService-parent">
+                <h6 className="serv-text">
+                  Choose services that your salon provides
+                </h6>
+                <div className="select-services">
+                  <label className="ser-width">
+                    <input
+                      type="checkbox"
+                      name="service"
+                      value="Haircut"
+                      onChange={handleCheckBoxChange}
+                    />
+                    <span className="checkbox-label">Haircut</span>
+                  </label>
+                  <label className="ser-width">
+                    <input
+                      type="checkbox"
+                      name="service"
+                      value="Manicure"
+                      onChange={handleCheckBoxChange}
+                    />
+                    <span className="checkbox-label">Manicure</span>
+                  </label>
+                  <label className="ser-width">
+                    <input
+                      type="checkbox"
+                      name="service"
+                      value="Facial"
+                      onChange={handleCheckBoxChange}
+                    />
+                    <span className="checkbox-label">Facial</span>
+                  </label>
+                  <label className="ser-width">
+                    <input
+                      type="checkbox"
+                      name="service"
+                      value="Hair Style"
+                      onChange={handleCheckBoxChange}
+                    />
+                    <span className="checkbox-label">Hair Style</span>
+                  </label>
+                  <label className="ser-width">
+                    <input
+                      type="checkbox"
+                      name="service"
+                      value="Bridal Makeup"
+                      onChange={handleCheckBoxChange}
+                    />
+                    <span className="checkbox-label">Bridal Makeup</span>
+                  </label>{" "}
+                </div>
               </div>
               {/* Salon Location */}
               <div className="sal-loc sal-common">

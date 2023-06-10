@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 //const crypto = require('crypto');
 
-
 const ownerSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -37,12 +36,21 @@ const ownerSchema = new mongoose.Schema({
   profileImg: {
     type: String,
   },
-  tokens: [{
-    token :{
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  // Adding Services to Salon Owner Schema
+  services: [
+    {
       type: String,
-      required:true
-    }
-  }]
+      required: true,
+    },
+  ],
 });
 
 const SalonOwner = mongoose.model("SalonOwner", ownerSchema);

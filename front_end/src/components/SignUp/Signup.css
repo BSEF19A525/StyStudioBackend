@@ -30,7 +30,6 @@
   background: white;
   /* width: 600px; */
   width: 50%;
-  height: 100vh;
   padding: 40px 100px;
 }
 
@@ -173,11 +172,18 @@ form input {
     border-radius: 5px;
   }
 }
-
+@media (max-width: 768px) {
+  .ser-width {
+    width: 48%;
+  }
+}
 @media (max-width: 576px) {
   .flex-com {
     flex-wrap: wrap;
     margin-top: unset;
+  }
+  .ser-width {
+    width: 100%;
   }
   .flex-com input {
     width: 100%;
@@ -188,7 +194,6 @@ form input {
   }
   .short-desc {
     width: 100%;
-    /* margin-top: 0rem; */
   }
   .salon-img,
   .short-desc textarea {
@@ -201,4 +206,28 @@ form input {
     margin-top: unset;
     margin-bottom: 10px;
   }
+  .select-services {
+    margin-bottom: 12px;
+  }
+}
+
+/* Services  */
+.select-services {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  justify-content: space-between;
+}
+.checkbox-label {
+  margin-left: 5px;
+  font-size: 15px;
+  border-radius: 8px;
+  outline: none;
+  border-color: #3d5054;
+  border-width: 1px;
+  color: #757575;
+}
+.serv-text {
+  color: #757575;
+  margin-top: 17px;
 }
