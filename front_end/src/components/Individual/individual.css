@@ -168,6 +168,8 @@ body {
   text-align: center;
 }
 .see-more {
+  display: flex;
+  justify-content: space-around;
   margin-top: 3rem;
 }
 .see-more button {
@@ -325,4 +327,8 @@ body {
     width: 172px;
     height: 54px;
   }
+}
+.service-container{
+  display: flex;
+  justify-content: space-between;
 }

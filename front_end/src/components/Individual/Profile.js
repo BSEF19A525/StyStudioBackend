@@ -1,46 +1,54 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import profile from "../../assets/salon_profile.jpg";
-import Cookies from "universal-cookie";
+import {useState, useEffect} from 'react';
+
+
 
 
 const Profile = () => {
 
-        const cookies = new Cookies();
-        const userName = cookies.get('user');
-          
-  
-  
+        const navigate = useNavigate(null);
+        
+        const [user, setUser] = useState({});
+
+
+        
+        const location = useLocation();
+        const userRes = (location.state?.user.user);
+
+        useEffect(()=>{
+          setUser(userRes);
+        }, [])
+
+
+        const handleEditClick = () =>{
+         navigate('/edit-profile', {
+          state: {user: userRes}
+         })
+        
+        }
+        console.log("User on profile page : ", user);
   return (
     <>
-      <div className="profile-outer">
+    {user.isLoggedin == true? (
+      <>
+       <div className="p-btn">
+                <button onClick={handleEditClick}>Edit Profile</button>
+        </div>
+       <div className="profile-outer">
         <div className="profile-parent">
           <div className="profile-main">
             <div className="profile-img img-width">
-              <img src={profile} alt="Profile" />
+              <img src={`http://localhost:8000/api/image/${user.profileImg}`} alt="Profile" />
             </div>
-            <div className="profile-content cont-width ">
-              
-              {userName ? (
-                <>
-                <p>Welcome </p>
-                 <div className="title">{userName}</div>
-                 </>
-              ):(
-                <>
-                <p>Welcome To,</p>
-                <div className="title">StyStudio</div>
-                </>                            
-              )}
+            <div className="profile-content cont-width ">                
+                <p>Welcome, </p>
+                 <div className="title">{user.name}</div>
             
               <div className="text">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vivamus nibh dolor, gravida faucibus dolor consectetur,
-                  pulvinar rhoncus risus. Fusce vel rutrum mi. Suspendisse
-                  pretium tellus eu ipsum pellentesque convallis. Ut mollis
-                  libero eu massa imperdiet faucibus vitae non diam. Sed egestas
-                  felis libero, ut suscipit nisl varius non. Proin eget suscipit
-                  nulla. Nulla facilisi. In hac habitasse platea dictumst.
-                </p>
+                 {user.description}
+                  </p>
               </div>
               <div className="p-btn">
                 <button>View More</button>
@@ -49,6 +57,38 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      
+      
+      </>
+    ):(<>
+     <div className="profile-outer">
+        <div className="profile-parent">
+          <div className="profile-main">
+            <div className="profile-img img-width">
+              <img src={`http://localhost:8000/api/image/${user.profileImg}`} alt="Profile" />
+            </div>
+            <div className="profile-content cont-width ">
+                <>
+                <p>Welcome To,</p>
+                <div className="title"> {user.salon}</div>
+                </>                            
+              
+            
+              <div className="text">
+                <p>
+                 {user.description}
+                  </p>
+              </div>
+              <div className="p-btn">
+                <button>View More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </>)}
+     
     </>
   );
 };

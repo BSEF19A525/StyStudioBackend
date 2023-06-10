@@ -9,6 +9,7 @@ import Navbar from "./components/Home/Navbar";
 import Footer from "./components/Home/Footer";
 import Password from "./pages/ConPassword";
 import Booking from "./pages/Booking";
+import EditProfile from "./pages/EditProfile";
 
 const App = () => {
   const location = useLocation();
@@ -34,6 +35,8 @@ const App = () => {
         <Route path="/Book" element={<Booking />} />
         <Route path="/individual/:id" element={<Individual />} />
         <Route exact="true" path="/individual" element={<Individual />} />
+        <Route path="/edit-profile" element={<EditProfile/>} />
+
        
 
 

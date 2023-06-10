@@ -13,8 +13,9 @@ import {faUser} from '@fortawesome/free-solid-svg-icons';
 
 function Navbar() {
 
-
+  
   const navigate = useNavigate(null);
+ 
 
   const cookies = new Cookies();
   const userName = cookies.get("user");
@@ -127,13 +128,13 @@ function Navbar() {
                       </li>
                     
                       {showLogout && (
-                      
+                       <>
                       <li>
                         <NavLink to="/logout" onClick={handleLogout}>
                           Logout
                         </NavLink>
                       </li>
-                      
+                      </>
                       )}
                       </div>
                    

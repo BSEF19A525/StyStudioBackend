@@ -22,7 +22,7 @@ const Authenticate = async (req, res, next) => {
     if (!rootUser) {
       throw new Error("User not Found"); /*"tokens.token" :token*/
     }
-    // console.log(rootUser);
+   // console.log(rootUser);
     req.token = token;
     req.rootUser = rootUser;
     req.userID = rootUser._id;
