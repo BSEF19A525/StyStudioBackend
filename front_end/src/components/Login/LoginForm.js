@@ -103,7 +103,7 @@ const LoginForm = () => {
 
         if (authenticateResponse.status === 200) {
           toast.dismiss();
-
+          
           // Move the user to the individual page
           // console.log("User authenticated");
           navigate("/individual", {

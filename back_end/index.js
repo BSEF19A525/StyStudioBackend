@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const authenticate = require("./authentication/authenticate");
 const cookieParser = require("cookie-parser");
+const { Compressor, ObjectId } = require('mongodb');
 
 
 
@@ -209,9 +210,38 @@ app.get("/api/data/:location", async (req, res) => {
 
 // Ali Malik Code
 router.get("/individual", authenticate, (req, res) => {
-  res.json({ name: req.rootUser.username });
+  
+
+  const user ={
+    name : req.rootUser.username,
+    profileImg : req.rootUser.profileImg,
+    description : req.rootUser.description,
+    salon : req.rootUser.salonName,
+    isLoggedin : true
+
+  }
+  res.json({ user: user });
 });
 
+
+router.get("/individual/:id", async (req, res) => {
+  console.log("inside indiviual portfolio");
+  console.log("id : ", req.params.id);
+
+  const id = new ObjectId(req.params.id);
+  console.log("id2 : ", id);
+  const user = await SalonOwner.findOne({ _id: id });
+  console.log("user :",user.username);
+  const portfolio ={
+    name : user.username,
+    profileImg : user.profileImg,
+    description : user.description,
+    salon : user.salonName,
+    isLoggedin : false
+  };
+  console.log("portfolio : ", portfolio.name);
+  res.json({ user: portfolio });
+});
 // for fetching salon email based on name
 
 app.get("/book/:salonName", async (req, res) => {

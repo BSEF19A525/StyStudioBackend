@@ -1,8 +1,12 @@
-import React from "react";
+import {React,useState} from "react";
 import hair_oil from "../../assets/hair_oil.jpg";
 import hair_style from "../../assets/hair_style.jpg";
 import facial from "../../assets/facial.jpg";
+
+
+
 const Services = () => {
+
   return (
     <>
       <div className="service-parent">
@@ -32,7 +36,9 @@ const Services = () => {
             </div>
           </div>
           <div className="see-more">
-            <button>See More</button>
+            <button >See More</button>
+           
+
           </div>
         </div>
       </div>
