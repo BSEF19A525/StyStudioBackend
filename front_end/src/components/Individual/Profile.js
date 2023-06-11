@@ -30,66 +30,44 @@ const Profile = () => {
         console.log("User on profile page : ", user);
   return (
     <>
-    {user.isLoggedin == true? (
-      <>
-       <div className="p-btn">
-                <button onClick={handleEditClick}>Edit Profile</button>
-        </div>
-       <div className="profile-outer">
-        <div className="profile-parent">
-          <div className="profile-main">
-            <div className="profile-img img-width">
-              <img src={`http://localhost:8000/api/image/${user.profileImg}`} alt="Profile" />
-            </div>
-            <div className="profile-content cont-width ">                
-                <p>Welcome, </p>
-                 <div className="title">{user.name}</div>
-            
-              <div className="text">
-                <p>
-                 {user.description}
-                  </p>
-              </div>
-              <div className="p-btn">
-                <button>View More</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-      </>
-    ):(<>
-     <div className="profile-outer">
+  <div className="profile-outer">
         <div className="profile-parent">
           <div className="profile-main">
             <div className="profile-img img-width">
               <img src={`http://localhost:8000/api/image/${user.profileImg}`} alt="Profile" />
             </div>
             <div className="profile-content cont-width ">
-                <>
-                <p>Welcome To,</p>
-                <div className="title"> {user.salon}</div>
-                </>                            
-              
-            
-              <div className="text">
+            {user.isLoggedin == true? ( <>
+              <div className="p-btn">
+                <button onClick={handleEditClick}>Edit Profile</button>
+              </div>
+                <p>Welcome,</p>
+                <div className="title"> {user.name}</div>
+                </>):(
+                 <>
+                 <p>Welcome To,</p>
+                 <div className="title"> {user.salon}</div>
+                 </>
+                )}                      
+                <div className="text">
                 <p>
                  {user.description}
                   </p>
               </div>
-              <div className="p-btn">
-                <button>View More</button>
+              <div className='svc'>
+              {user.services?.map((item,index)=>
+              <div className="svc-name" key={index}>  {item}  </div>
+              )}
               </div>
+          
             </div>
           </div>
         </div>
       </div>
       
-    </>)}
-     
     </>
+     
+    
   );
 };
 

@@ -9,25 +9,25 @@ const Services = () => {
 
   return (
     <>
-      <div className="service-parent">
+      {/*<div className="service-parent">
         <div className="service-width">
           <div className="service-title">Explore Our Services</div>
           <div className="service-main">
-            {/* Service 1 */}
+            
             <div className="service-1 sv-width">
               <div className="svc-img">
                 <img src={hair_oil} alt="hairOil" />
               </div>
               <div className="svc-name">Hair Oil</div>
             </div>
-            {/* Service 2 */}
+            
             <div className="service-2 sv-width">
               <div className="svc-img">
                 <img src={facial} alt="Facial" />
               </div>
               <div className="svc-name">Facial</div>
             </div>
-            {/* Service 3 */}
+            
             <div className="service-3 sv-width">
               <div className="svc-img">
                 <img src={hair_style} alt="hairStyle" />
@@ -41,7 +41,7 @@ const Services = () => {
 
           </div>
         </div>
-      </div>
+  </div>*/}
     </>
   );
 };
