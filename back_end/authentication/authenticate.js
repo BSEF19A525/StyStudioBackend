@@ -15,7 +15,6 @@ app.use(
 
 const Authenticate = async (req, res, next) => {
   try {
-    console.log("trying authentication");
     const token = req.cookies.jwtoken;
     // console.log("token fetched from cookie : ", token);
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
