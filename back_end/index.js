@@ -242,15 +242,18 @@ app.get("/api/data/:location", async (req, res) => {
 // Ali Malik Code
 router.get("/individual", authenticate, (req, res) => {
   
-
+  console.log("inside user authentication");
   const user ={
+    id : req.rootUser._id,
     name : req.rootUser.username,
     profileImg : req.rootUser.profileImg,
     description : req.rootUser.description,
     salon : req.rootUser.salonName,
+    services: req.rootUser.services,
     isLoggedin : true
 
   }
+  console.log("services : ", user.services);
   res.json({ user: user });
 });
 
@@ -268,11 +271,47 @@ router.get("/individual/:id", async (req, res) => {
     profileImg : user.profileImg,
     description : user.description,
     salon : user.salonName,
+    services: user.services,
     isLoggedin : false
   };
-  console.log("portfolio : ", portfolio.name);
+  console.log("portfolio : ", portfolio.services);
   res.json({ user: portfolio });
 });
+
+app.post("/edit-profile",upload.single("profileImg"), async (req,res) => {
+//   console.log("inside edit profile api");
+   const desc = req.body.description;
+   //console.log("request in desc", desc);
+   const services = JSON.parse(req.body.services);
+  // console.log("sevices : ", services);
+  // console.log("id : ", req.body.id);
+  const objectId = new ObjectId(req.body.id);
+
+
+  const file = req.file;
+  const imageUrl = file.filename;
+  //console.log(imageUrl);
+   
+  try {
+    const result = await SalonOwner.findOneAndUpdate(
+      { _id: objectId },
+      { $set: { description: desc, services: services , profileImg:imageUrl } },
+      { returnOriginal: false }
+    );
+
+    res.status(200).json({ user:result ,message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "An error occurred while updating the profile" });
+  }
+   //const description = req.body.description;
+   //const services = JSON.parse(req.body.services);
+   //console.log("services inside edit : ",JSON.parse(req.body.services));
+
+   //console.log("description inside edit : ",req.body.description);
+
+
+})
 // for fetching salon email based on name
 
 app.get("/book/:salonName", async (req, res) => {
