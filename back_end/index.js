@@ -242,7 +242,7 @@ app.get("/api/data/:location", async (req, res) => {
 // Ali Malik Code
 router.get("/individual", authenticate, (req, res) => {
   
-
+  console.log("inside user authentication");
   const user ={
     id : req.rootUser._id,
     name : req.rootUser.username,
@@ -278,7 +278,7 @@ router.get("/individual/:id", async (req, res) => {
   res.json({ user: portfolio });
 });
 
-app.post("/edit-profile",upload.none(), async (req,res) => {
+app.post("/edit-profile",upload.single("profileImg"), async (req,res) => {
 //   console.log("inside edit profile api");
    const desc = req.body.description;
    //console.log("request in desc", desc);
@@ -286,11 +286,16 @@ app.post("/edit-profile",upload.none(), async (req,res) => {
   // console.log("sevices : ", services);
   // console.log("id : ", req.body.id);
   const objectId = new ObjectId(req.body.id);
+
+
+  const file = req.file;
+  const imageUrl = file.filename;
+  //console.log(imageUrl);
    
   try {
     const result = await SalonOwner.findOneAndUpdate(
       { _id: objectId },
-      { $set: { description: desc, services: services } },
+      { $set: { description: desc, services: services , profileImg:imageUrl } },
       { returnOriginal: false }
     );
 

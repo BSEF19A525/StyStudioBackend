@@ -61,10 +61,27 @@ function Navbar() {
   };
 
   
-    const [showLogout,setShowLogout] = useState(false);
-    const handleIconClick = () =>{
-      setShowLogout(!showLogout);
-
+    const handleIconClick = async () =>{
+      console.log("User icon is clicked");
+      const authenticateResponse = await axios.get(
+        "http://localhost:8000/individual",
+        {
+          withCredentials: true,
+        }
+      );
+      if (authenticateResponse.status === 200) {
+        toast.dismiss();
+        
+        // Move the user to the individual page
+        // console.log("User authenticated");
+        navigate("/individual", {
+          state: { user: authenticateResponse.data },
+        });
+        console.log(authenticateResponse);
+      } else {
+        // throw new Error("User authentication failed");
+        console.log("User Authentication Failed");
+      }
     
   }
   const handleLogout = async () => {
@@ -120,23 +137,21 @@ function Navbar() {
                   </li>
                   
                   {userName ? (
+                    <>
                     
-                    <div> 
                       <li>
                       <FontAwesomeIcon icon={faUser} /> {"    "} 
                       <NavLink onClick={handleIconClick} style={{ marginLeft: '3px' }}>{firstName}</NavLink><br></br><br></br>
                       </li>
-                    
-                      {showLogout && (
-                       <>
+                       
                       <li>
                         <NavLink to="/logout" onClick={handleLogout}>
                           Logout
                         </NavLink>
                       </li>
                       </>
-                      )}
-                      </div>
+                      
+                    
                    
                   ) : (
                     <>

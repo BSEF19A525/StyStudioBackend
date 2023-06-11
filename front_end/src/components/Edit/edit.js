@@ -11,6 +11,8 @@ const Edit = () => {
     description: "",
   });
   const [profileImg, setProfileImg] = useState(null);
+  const [preview, setPreview] = useState("");
+
   const location = useLocation();
   const user = location.state?.user;
    
@@ -48,10 +50,13 @@ const Edit = () => {
 
     const form = new FormData();
     form.append("description", description);
-    //form.append("profileImg", profileImg);
+    form.append("profileImg", profileImg);
     // services that salon is providing
     form.append("services", JSON.stringify(services));
     form.append("id" ,user.id);
+
+
+    
     console.log('form desc: ', form.get('description'));
     console.log('form services', form.get('services'));
     
@@ -101,6 +106,17 @@ const Edit = () => {
 
   
   }
+  useEffect(() => {
+    if (profileImg) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(profileImg);
+    } else {
+      setPreview(`http://localhost:8000/api/image/${user.profileImg}`);
+    }
+  }, [profileImg]);
 
 
   return (
@@ -108,10 +124,40 @@ const Edit = () => {
        <div className="profile-outer">
         <div className="profile-parent">
           <div className="profile-main">
-            <div className="profile-img img-width">
-              <img src={`http://localhost:8000/api/image/${user.profileImg}`} alt="Profile" />
-            </div>   
+          
             <form method="POST" onSubmit={onUpdateClick}>
+
+            <div className="img_desc">
+                <div className="salon-img">
+                  <div>
+                    {preview ? (
+                      <img src={preview} className="prev-img" alt="Preview" />
+                    ) : (
+                      <label>Add Salon Image</label>
+                    )}
+                    <input
+                      className="salImg"
+                      id="profileImg"
+                      type="file"
+                      accept="image/*"
+                      value={formData.profileImg}
+                      name="profileImg"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file && file.type.substring(0, 5) === "image") {
+                          setProfileImg(file);
+                        } else {
+                          setProfileImg(null);
+                        }
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <label htmlFor="profileImg" className="custom-file-upload">
+                Browse
+              </label>
 
               <div className="text">
               <textarea
