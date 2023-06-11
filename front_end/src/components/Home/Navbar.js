@@ -62,7 +62,6 @@ function Navbar() {
 
   
     const handleIconClick = async () =>{
-      console.log("User icon is clicked");
       const authenticateResponse = await axios.get(
         "http://localhost:8000/individual",
         {
