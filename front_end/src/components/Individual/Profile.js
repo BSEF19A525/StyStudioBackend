@@ -20,7 +20,7 @@ const Profile = () => {
           setUser(userRes);
         }, [])
 
-
+        console.log("user : ", userRes);
         const handleEditClick = () =>{
          navigate('/edit-profile', {
           state: {user: userRes}
