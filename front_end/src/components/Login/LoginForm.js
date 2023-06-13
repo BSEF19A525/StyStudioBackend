@@ -1,16 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const [loginDetails, setloginDetails] = useState({
     email: "",
     pass: "",
   });
-
-  const navigate = useNavigate(null);
 
   // handle Change
   const handleChange = (e) => {

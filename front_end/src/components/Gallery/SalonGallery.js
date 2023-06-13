@@ -114,10 +114,10 @@ const SalonGallery = () => {
                     {/* </Link> */}
                     <div className="salon-content">
                       <h3 className="salon-name"> {contents.salonName}</h3>
-                      <p className="salon-description">
+                      {/* <p className="salon-description">
                         {" "}
                         {contents.description}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>

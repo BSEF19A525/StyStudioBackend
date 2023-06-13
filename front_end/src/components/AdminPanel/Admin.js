@@ -72,12 +72,18 @@ const Admin = () => {
                 <td>{salon.email}</td>
                 <td>{salon.location}</td>
                 <td>
-                  <button onClick={() => handleUpdateEmail(salon.id)}>
+                  <button
+                    className="admin-btn"
+                    onClick={() => handleUpdateEmail(salon.id)}
+                  >
                     Update Email
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => handleDeleteSalon(salon.id)}>
+                  <button
+                    className="admin-btn"
+                    onClick={() => handleDeleteSalon(salon.id)}
+                  >
                     Delete User
                   </button>
                 </td>
@@ -89,11 +95,11 @@ const Admin = () => {
       {isModalOpen && (
         <div className="modal">
           <form onSubmit={handleModalSubmit}>
-            <label>
+            <label className="admin-label">
               Current Email:
               <input type="email" value={currentEmail} disabled />
             </label>
-            <label>
+            <label className="admin-label">
               New Email:
               <input
                 type="email"
@@ -101,7 +107,9 @@ const Admin = () => {
                 onChange={(e) => setNewEmail(e.target.value)}
               />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" className="admin-btn">
+              Submit
+            </button>
           </form>
         </div>
       )}
