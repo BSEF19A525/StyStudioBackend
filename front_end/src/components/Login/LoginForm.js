@@ -34,6 +34,15 @@ const LoginForm = () => {
     try {
       const { email, pass } = loginDetails;
 
+      // Moving to Admin Dashboard
+      if (
+        email === process.env.REACT_APP_ADMIN_EMAIL &&
+        pass === process.env.REACT_APP_ADMIN_PASS
+      ) {
+        navigate("/admin");
+        return;
+      }
+
       const response = await axios.post(
         "http://localhost:8000/login",
         {
