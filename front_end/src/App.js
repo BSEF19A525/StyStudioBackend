@@ -10,6 +10,7 @@ import Footer from "./components/Home/Footer";
 import Password from "./pages/ConPassword";
 import Booking from "./pages/Booking";
 import EditProfile from "./pages/EditProfile";
+import Admin from "./components/AdminPanel/Admin";
 
 const App = () => {
   const location = useLocation();
@@ -17,7 +18,7 @@ const App = () => {
   const hideNavbarAndFooter =
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
-    location.pathname === "/Book" ||
+    location.pathname === "/admin" ||
     location.pathname === "/changePass";
 
   return (
@@ -33,13 +34,10 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/changePass" element={<Password />} />
         <Route path="/Book" element={<Booking />} />
-        <Route path="/individual/:id" element={<Individual />} />
+        <Route exact="true" path="/individual/:id" element={<Individual />} />
         <Route exact="true" path="/individual" element={<Individual />} />
-        <Route path="/edit-profile" element={<EditProfile/>} />
-
-       
-
-
+        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
     </>

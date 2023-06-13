@@ -80,6 +80,12 @@
   /* width: 190px; */
   width: 48%;
 }
+.readOnly {
+  font-weight: bold;
+  color: green;
+  letter-spacing: 1px;
+}
+
 /*          ////////////////////////      responsive             ///////////////////////////////////  */
 @media (max-width: 912px) {
   .title0 {

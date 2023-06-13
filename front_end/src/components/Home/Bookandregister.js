@@ -17,7 +17,7 @@ function Bookandregister() {
             Register Now!!
           </button>
         </div>
-        <div className="booked">
+        {/* <div className="booked">
           <h2>Book your Appointment today in one of the best salons</h2>
           <button
             onClick={() => {
@@ -27,7 +27,7 @@ function Bookandregister() {
           >
             Book An Appointment
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -7,6 +9,32 @@ const HomeGallery = () => {
   const [data, setData] = useState([]);
 
   const navigate = useNavigate(null);
+
+  const handleCardClick = async (id) => {
+    console.log("inside card click, the id is ", id);
+    try {
+      // Make the API call to authenticate the user
+      const response = await axios.get(
+        `http://localhost:8000/individual/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.dismiss();
+
+        // Move the user to the individual page
+        // console.log("User authenticated");
+        navigate("/individual", {
+          state: { user: response.data },
+        });
+        console.log("response in Saloon galler", response);
+      }
+    } catch (err) {
+      console.log("error in Salon Gallery : ", err);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -40,15 +68,19 @@ const HomeGallery = () => {
             <div className="salongal">
               {data.slice(0, 3).map((item) => {
                 return (
-                  <div className="galimg" key={item._id}>
+                  <div
+                    className="galimg"
+                    key={item._id}
+                    onClick={() => {
+                      handleCardClick(item._id);
+                    }}
+                  >
                     <div className="image-container">
-                      <Link to={`/individual/${item._id}`}>
-                        <img
-                          src={`http://localhost:8000/api/image/${item.profileImg}`}
-                          alt="Salon Image"
-                          className="img-style"
-                        />
-                      </Link>
+                      <img
+                        src={`http://localhost:8000/api/image/${item.profileImg}`}
+                        alt="Salon Image"
+                        className="img-style"
+                      />
 
                       <div className="overlay">
                         <h3 className="salon-name">{item.salonName}</h3>
@@ -70,6 +102,7 @@ const HomeGallery = () => {
           </div> */}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

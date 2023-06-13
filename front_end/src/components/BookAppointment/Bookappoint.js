@@ -1,10 +1,35 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Bookappoint() {
+  // for getting salonName and service from individual page
+
+  console.log("------------  INSIDE BOOKING --------------");
+
+  const [bookInfo, setBookInfo] = useState({
+    salService: "",
+    salName: "",
+    salEmail: "",
+  });
+
+  const location = useLocation();
+  const salonService = location.state?.salonService;
+  const salnName = location.state?.salonName;
+  const salonEmail = location.state?.salonEmail;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setBookInfo({
+      salService: salonService,
+      salName: salnName,
+      salEmail: salonEmail,
+    });
+  }, []);
+
   const [bookData, setBookData] = useState({
     fullName: "",
     email: "",
@@ -27,6 +52,7 @@ function Bookappoint() {
       };
     });
   };
+
   // Date validation function
   const validateDate = (date) => {
     console.log("Before: " + date);
@@ -54,22 +80,99 @@ function Bookappoint() {
     }
   };
 
-  // phone Validation Function
-  // const validatePhone = (phone) => {
-  //   const phoneNum = phone.length;
-  //   if (phoneNum < 12 && phoneNum >= 9) {
-  //     return phoneNum;
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const { fullName, phone, date, salonName, service } = bookData;
+
+  //   const bookingDate = validateDate(date);
+
+  //   // Phone Number Validity
+  //   if (phone.length < 12 && phone.length >= 9) {
+  //     // Date Validity --> No Past Date allowed
+  //     if (bookingDate !== -1) {
+  //       // Service Validity --> Only Alphabets, whitespace character, including spaces, tabs, and line breaks.
+  //       const alphabetsRegex = /^[A-Za-z\s]+$/;
+  //       if (alphabetsRegex.test(service)) {
+  //         try {
+  //           console.log("default: " + service);
+
+  //           // Make an API request to your backend server
+  //           const response = await axios.get(
+  //             `http://localhost:8000/book/${salonName}`
+  //           );
+  //           const data = response.data;
+
+  //           if (data) {
+  //             const { email, salonName } = data;
+  //             console.log("email: " + email);
+  //             console.log("salonName: " + salonName);
+  //             toast.loading("Loading...");
+  //             setTimeout(() => {
+  //               toast.dismiss();
+  //             }, 3000);
+  //             try {
+  //               // Send the email to the salon using EmailJS
+  //               const emailResponse = await emailjs.send(
+  //                 process.env.REACT_APP_EMAILJS_SERVICE_ID,
+  //                 process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+  //                 {
+  //                   salonName,
+  //                   salonEmail: email, // Salon's email address retrieved from the backend
+  //                   fullName,
+  //                   email: bookData.email,
+  //                   phone,
+  //                   date: bookingDate,
+  //                   service,
+  //                 },
+  //                 process.env.REACT_APP_EMAILJS_USER_ID
+  //               );
+
+  //               if (emailResponse.status === 200) {
+  //                 setBookData({
+  //                   fullName: "",
+  //                   email: "",
+  //                   phone: "",
+  //                   salonName: "",
+  //                   date: "",
+  //                   service: "",
+  //                 });
+  //                 setTimeout(() => {
+  //                   toast.success(`Booking request sent to salon`);
+  //                 }, 3000);
+  //               }
+  //               console.log(
+  //                 "Booking request sent to salon:",
+  //                 emailResponse.status,
+  //                 emailResponse.text
+  //               );
+  //             } catch (error) {
+  //               console.error("Error sending email to salon:", error);
+  //             }
+  //           }
+  //         } catch (error) {
+  //           console.error("Error retrieving salon data:", error.message);
+  //         }
+  //       } else {
+  //         toast.error("Accepting Alphabetic Characters Only");
+  //         setBookData({ ...bookData, service: "" });
+  //         serviceRef.current.focus();
+  //       }
+  //     } else {
+  //       toast.error("Choose Today or Future Date");
+  //       setBookData({ ...bookData, date: "" });
+  //       dateRef.current.focus();
+  //     }
   //   } else {
-  //     toast.error("Phone Number Should range from 9 - 11 digits");
+  //     toast.error("Phone numbers should contain 9 to 11 digits.");
   //     setBookData({ ...bookData, phone: "" });
-  //     .current.focus();
+  //     phoneRef.current.focus();
   //   }
   // };
 
-  const handleSubmit = async (e) => {
+  const handleBookingService = async (e) => {
     e.preventDefault();
-    const { fullName, phone, date, salonName, service } = bookData;
-
+    const { fullName, phone, date } = bookData;
+    const { salName, salService, salEmail } = bookInfo;
     const bookingDate = validateDate(date);
 
     // Phone Number Validity
@@ -78,68 +181,54 @@ function Bookappoint() {
       if (bookingDate !== -1) {
         // Service Validity --> Only Alphabets, whitespace character, including spaces, tabs, and line breaks.
         const alphabetsRegex = /^[A-Za-z\s]+$/;
-        if (alphabetsRegex.test(service)) {
+        if (alphabetsRegex.test(salService)) {
           try {
-            // Make an API request to your backend server
-            const response = await axios.get(
-              `http://localhost:8000/book/${salonName}`
+            console.log("default: " + salService);
+            console.log(salService);
+
+            // Show loading toast
+
+            // Send the email to the salon using EmailJS
+            const emailResponse = await emailjs.send(
+              process.env.REACT_APP_EMAILJS_SERVICE_ID,
+              process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+              {
+                salonName: salName,
+                salonEmail: salEmail,
+                fullName,
+                email: bookData.email,
+                phone,
+                date: bookingDate,
+                service: salService,
+              },
+              process.env.REACT_APP_EMAILJS_USER_ID
             );
-            const data = response.data;
 
-            if (data) {
-              const { email, salonName } = data;
-              console.log("email: " + email);
-              console.log("salonName: " + salonName);
-              toast.loading("Loading...");
-              setTimeout(() => {
-                toast.dismiss();
-              }, 3000);
-              try {
-                // Send the email to the salon using EmailJS
-                const emailResponse = await emailjs.send(
-                  process.env.REACT_APP_EMAILJS_SERVICE_ID,
-                  process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-                  {
-                    salonName: salonName,
-                    salonEmail: email, // Salon's email address retrieved from the backend
-                    fullName,
-                    email: bookData.email,
-                    phone,
-                    date: bookingDate,
-                    service,
-                  },
-                  process.env.REACT_APP_EMAILJS_USER_ID
-                );
-
-                if (emailResponse.status === 200) {
-                  setBookData({
-                    fullName: "",
-                    email: "",
-                    phone: "",
-                    salonName: "",
-                    date: "",
-                    service: "",
-                  });
-                  setTimeout(() => {
-                    toast.success(`Booking request sent to salon`);
-                  }, 3000);
-                }
-                console.log(
-                  "Booking request sent to salon:",
-                  emailResponse.status,
-                  emailResponse.text
-                );
-              } catch (error) {
-                console.error("Error sending email to salon:", error);
-              }
+            if (emailResponse.status === 200) {
+              // Clear form data and show success toast after 3 seconds
+              setBookData({
+                fullName: "",
+                email: "",
+                phone: "",
+                date: "",
+              });
+              setBookInfo({
+                salName: "", // Reset salon name to null
+                salService: "", // Reset salon service to null
+              });
+              toast.success(`Booking request sent to salon`);
             }
+            console.log(
+              "Booking request sent to salon:",
+              emailResponse.status,
+              emailResponse.text
+            );
           } catch (error) {
             console.error("Error retrieving salon data:", error.message);
+          } finally {
+            // Dismiss loading toast
+            toast.dismiss();
           }
-        } else {
-          toast.error("Accepting Alphabetic Characters Only");
-          setBookData({ ...bookData, service: "" });
-          serviceRef.current.focus();
         }
       } else {
         toast.error("Choose Today or Future Date");
@@ -161,7 +250,7 @@ function Bookappoint() {
           <div className="backImg0"></div>
           <div className="form0">
             <h1 className="title0">Book Appointment</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleBookingService}>
               <div className="name-email0 flex-com0">
                 <input
                   type="text"
@@ -198,18 +287,31 @@ function Bookappoint() {
                   required
                   autoComplete="off"
                 />
-                <input
-                  type="text"
-                  value={bookData.salonName}
-                  onChange={handleBooking}
-                  placeholder="Salon Name"
-                  className="margin"
-                  name="salonName"
-                  required
-                  autoComplete="off"
-                />
+
+                {bookInfo.salName ? (
+                  <input
+                    type="text"
+                    value={bookInfo.salName}
+                    placeholder="Salon Name"
+                    readOnly
+                    className="margin readOnly"
+                    name="salonName"
+                    title="You can't edit this"
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={bookData.salonName}
+                    onChange={handleBooking}
+                    placeholder="Salon Name"
+                    className="margin"
+                    name="salonName"
+                    required
+                    autoComplete="off"
+                  />
+                )}
               </div>
-              {/* Salon Name */}
+              {/* Date Of Booking */}
               <div className="sal-name0 sal-common0">
                 <input
                   type="date"
@@ -223,20 +325,36 @@ function Bookappoint() {
                   autoComplete="off"
                 />
               </div>
-              {/* Salon Location */}
-              <div className="sal-loc0 sal-common0">
-                <input
-                  type="text"
-                  ref={serviceRef}
-                  className="margin"
-                  value={bookData.service}
-                  onChange={handleBooking}
-                  placeholder="Service you want to avail"
-                  name="service"
-                  required
-                  autoComplete="off"
-                />
-              </div>
+              {/* Service Name */}
+
+              {bookInfo.salService ? (
+                <div className="sal-loc0 sal-common0">
+                  <input
+                    type="text"
+                    title="You can't edit this"
+                    ref={serviceRef}
+                    className="margin readOnly"
+                    readOnly
+                    value={bookInfo.salService}
+                    placeholder="Service you want to avail"
+                    name="service"
+                  />
+                </div>
+              ) : (
+                <div className="sal-loc0 sal-common0">
+                  <input
+                    type="text"
+                    ref={serviceRef}
+                    className="margin"
+                    value={bookData.service}
+                    onChange={handleBooking}
+                    placeholder="Service you want to avail"
+                    name="service"
+                    required
+                    autoComplete="off"
+                  />
+                </div>
+              )}
 
               <div className="sub-btn0">
                 <button type="submit">Book</button>

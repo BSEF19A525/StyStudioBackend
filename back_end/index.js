@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const authenticate = require("./authentication/authenticate");
 const cookieParser = require("cookie-parser");
-const { Compressor, ObjectId } = require('mongodb');
+const { Compressor, ObjectId } = require("mongodb");
 
 connectDB();
 
@@ -63,7 +63,8 @@ const upload = multer({ dest: "public/uploads/" });
 //   }
 // });
 
-// SignUp with Services
+/* SignUp with Services */
+
 app.post("/signup", upload.single("profileImg"), async (req, res) => {
   const { username, email, pass, cpass, salonName, location, description } =
     req.body;
@@ -241,80 +242,102 @@ app.get("/api/data/:location", async (req, res) => {
 
 // Ali Malik Code
 router.get("/individual", authenticate, (req, res) => {
-  
   console.log("inside user authentication");
-  const user ={
-    id : req.rootUser._id,
-    name : req.rootUser.username,
-    profileImg : req.rootUser.profileImg,
-    description : req.rootUser.description,
-    salon : req.rootUser.salonName,
+  const user = {
+    id: req.rootUser._id,
+    name: req.rootUser.username,
+    profileImg: req.rootUser.profileImg,
+    description: req.rootUser.description,
+    salon: req.rootUser.salonName,
     services: req.rootUser.services,
-    isLoggedin : true
-
-  }
+    isLoggedin: true,
+  };
   console.log("services : ", user.services);
   res.json({ user: user });
 });
 
+// router.get("/individual/:id", async (req, res) => {
+//   console.log("inside indiviual portfolio");
+//   console.log("id : ", req.params.id);
 
-router.get("/individual/:id", async (req, res) => {
+//   const id = new ObjectId(req.params.id);
+//   console.log("id2 : ", id);
+//   const user = await SalonOwner.findOne({ _id: id });
+//   console.log("user :", user.username);
+//   const portfolio = {
+//     name: user.username,
+//     profileImg: user.profileImg,
+//     description: user.description,
+//     salon: user.salonName,
+//     services: user.services,
+//     isLoggedin: false,
+//   };
+//   console.log("portfolio : ", portfolio.services);
+//   res.json({ user: portfolio });
+// });
+
+app.get("/individual/:id", async (req, res) => {
   console.log("inside indiviual portfolio");
   console.log("id : ", req.params.id);
 
   const id = new ObjectId(req.params.id);
   console.log("id2 : ", id);
   const user = await SalonOwner.findOne({ _id: id });
-  console.log("user :",user.username);
-  const portfolio ={
-    name : user.username,
-    profileImg : user.profileImg,
-    description : user.description,
-    salon : user.salonName,
+  console.log("user :", user.username);
+  const portfolio = {
+    name: user.username,
+    profileImg: user.profileImg,
+    description: user.description,
+    salon: user.salonName,
     services: user.services,
-    isLoggedin : false
+    isLoggedin: false,
+    // Ali Malik gets this mail for sending booking request to respected
+    email: user.email,
   };
   console.log("portfolio : ", portfolio.services);
   res.json({ user: portfolio });
 });
 
-app.post("/edit-profile",upload.single("profileImg"), async (req,res) => {
-//   console.log("inside edit profile api");
-   const desc = req.body.description;
-   //console.log("request in desc", desc);
-   const services = JSON.parse(req.body.services);
+app.post("/edit-profile", upload.single("profileImg"), async (req, res) => {
+  //   console.log("inside edit profile api");
+  const desc = req.body.description;
+  //console.log("request in desc", desc);
+  const services = JSON.parse(req.body.services);
   // console.log("sevices : ", services);
   // console.log("id : ", req.body.id);
   const objectId = new ObjectId(req.body.id);
 
-
   const file = req.file;
   const imageUrl = file.filename;
   //console.log(imageUrl);
-   
+
   try {
     const result = await SalonOwner.findOneAndUpdate(
       { _id: objectId },
-      { $set: { description: desc, services: services , profileImg:imageUrl } },
+      { $set: { description: desc, services: services, profileImg: imageUrl } },
       { returnOriginal: false }
     );
 
-    res.status(200).json({ user:result ,message: "Profile updated successfully" });
+    res
+      .status(200)
+      .json({ user: result, message: "Profile updated successfully" });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "An error occurred while updating the profile" });
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the profile" });
   }
-   //const description = req.body.description;
-   //const services = JSON.parse(req.body.services);
-   //console.log("services inside edit : ",JSON.parse(req.body.services));
+  //const description = req.body.description;
+  //const services = JSON.parse(req.body.services);
+  //console.log("services inside edit : ",JSON.parse(req.body.services));
 
-   //console.log("description inside edit : ",req.body.description);
-
-
-})
+  //console.log("description inside edit : ",req.body.description);
+});
 // for fetching salon email based on name
 
 app.get("/book/:salonName", async (req, res) => {
+  console.log("Inside Booking ");
+
   let { salonName } = req.params;
   salonName = new RegExp(`^${salonName}$`, "i"); // Case-insensitive regular expression
 
