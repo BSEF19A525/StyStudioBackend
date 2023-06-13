@@ -7,15 +7,11 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faUser} from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
-
-  
   const navigate = useNavigate(null);
- 
 
   const cookies = new Cookies();
   const userName = cookies.get("user");
@@ -60,29 +56,27 @@ function Navbar() {
     }, 900);
   };
 
-  
-    const handleIconClick = async () =>{
-      const authenticateResponse = await axios.get(
-        "http://localhost:8000/individual",
-        {
-          withCredentials: true,
-        }
-      );
-      if (authenticateResponse.status === 200) {
-        toast.dismiss();
-        
-        // Move the user to the individual page
-        // console.log("User authenticated");
-        navigate("/individual", {
-          state: { user: authenticateResponse.data },
-        });
-        console.log(authenticateResponse);
-      } else {
-        // throw new Error("User authentication failed");
-        console.log("User Authentication Failed");
+  const handleIconClick = async () => {
+    const authenticateResponse = await axios.get(
+      "http://localhost:8000/individual",
+      {
+        withCredentials: true,
       }
-    
-  }
+    );
+    if (authenticateResponse.status === 200) {
+      toast.dismiss();
+
+      // Move the user to the individual page
+      // console.log("User authenticated");
+      navigate("/individual", {
+        state: { user: authenticateResponse.data },
+      });
+      console.log(authenticateResponse);
+    } else {
+      // throw new Error("User authentication failed");
+      console.log("User Authentication Failed");
+    }
+  };
   const handleLogout = async () => {
     try {
       const response = await axios.get("http://localhost:8000/logout", {
@@ -134,24 +128,27 @@ function Navbar() {
                       Contact
                     </NavLink>
                   </li>
-                  
+
                   {userName ? (
                     <>
-                    
                       <li>
-                      <FontAwesomeIcon icon={faUser} /> {"    "} 
-                      <NavLink onClick={handleIconClick} style={{ marginLeft: '3px' }}>{firstName}</NavLink><br></br><br></br>
+                        <FontAwesomeIcon icon={faUser} /> {"    "}
+                        <NavLink
+                          onClick={handleIconClick}
+                          style={{ marginLeft: "3px" }}
+                        >
+                          {firstName}
+                        </NavLink>
+                        <br></br>
+                        <br></br>
                       </li>
-                       
+
                       <li>
                         <NavLink to="/logout" onClick={handleLogout}>
                           Logout
                         </NavLink>
                       </li>
-                      </>
-                      
-                    
-                   
+                    </>
                   ) : (
                     <>
                       <li>
@@ -162,7 +159,6 @@ function Navbar() {
                       </li>
                     </>
                   )}
-                
                 </ul>
               </div>
             </div>

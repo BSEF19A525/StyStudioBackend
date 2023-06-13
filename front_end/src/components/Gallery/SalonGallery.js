@@ -11,38 +11,35 @@ import axios from "axios";
 const API_URL = "http://localhost:8000/api/data";
 
 const SalonGallery = () => {
-  
   const navigate = useNavigate(null);
 
-   //Wasla's new code here
-   const handleCardClick = async (id) => {
-        console.log("inside card click, the id is ", id);
-        try{
-        // Make the API call to authenticate the user
-        const response = await axios.get(
-          `http://localhost:8000/individual/${id}`,
-          {
-            withCredentials: true,
-          }
-        );
-
-        if (response.status === 200) {
-          toast.dismiss();
-          
-          // Move the user to the individual page
-          // console.log("User authenticated");
-          navigate("/individual", {
-            state: { user: response.data },
-          });
-          console.log("response in Saloon galler" , response);
-        }}
-        catch(err){
-          console.log("error in Salon Gallery : ", err);
+  // Wasla's new code here
+  const handleCardClick = async (id) => {
+    console.log("inside card click, the id is ", id);
+    try {
+      // Make the API call to authenticate the user
+      const response = await axios.get(
+        `http://localhost:8000/individual/${id}`,
+        {
+          withCredentials: true,
         }
+      );
+
+      if (response.status === 200) {
+        toast.dismiss();
+
+        // Move the user to the individual page
+        // console.log("User authenticated");
+        navigate("/individual", {
+          state: { user: response.data },
+        });
+        console.log("response in Saloon galler", response);
       }
-      
-        
-        
+    } catch (err) {
+      console.log("error in Salon Gallery : ", err);
+    }
+  };
+
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
@@ -77,9 +74,6 @@ const SalonGallery = () => {
     }
   };
 
-  
-
-
   useEffect(() => {
     fetchData(searchValue);
   }, [searchValue]);
@@ -105,15 +99,19 @@ const SalonGallery = () => {
               <Error />
             ) : (
               data.map((contents) => (
-                <div className="salon-card" key={contents._id} onClick={ () => handleCardClick(contents._id)} >
+                <div
+                  className="salon-card"
+                  key={contents._id}
+                  onClick={() => handleCardClick(contents._id)}
+                >
                   <div>
-                    <Link to={`/individual/${contents._id}`}>
-                      <img
-                        src={`http://localhost:8000/api/image/${contents.profileImg}`}
-                        alt="Salon Image"
-                        className="salon-image"
-                      />
-                    </Link>
+                    {/* <Link to={`/individual/${contents._id}`}> */}
+                    <img
+                      src={`http://localhost:8000/api/image/${contents.profileImg}`}
+                      alt="Salon Image"
+                      className="salon-image"
+                    />
+                    {/* </Link> */}
                     <div className="salon-content">
                       <h3 className="salon-name"> {contents.salonName}</h3>
                       <p className="salon-description">

@@ -17,7 +17,7 @@ const App = () => {
   const hideNavbarAndFooter =
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
-    location.pathname === "/Book" ||
+    // location.pathname === "/Book" ||
     location.pathname === "/changePass";
 
   return (
@@ -33,13 +33,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/changePass" element={<Password />} />
         <Route path="/Book" element={<Booking />} />
-        <Route path="/individual/:id" element={<Individual />} />
+        <Route exact="true" path="/individual/:id" element={<Individual />} />
         <Route exact="true" path="/individual" element={<Individual />} />
-        <Route path="/edit-profile" element={<EditProfile/>} />
-
-       
-
-
+        <Route path="/edit-profile" element={<EditProfile />} />
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
     </>
