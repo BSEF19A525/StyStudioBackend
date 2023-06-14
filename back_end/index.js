@@ -170,6 +170,7 @@ app.get("/logout", (req, res) => {
 // });
 
 app.get("/api/data", async (req, res) => {
+
   try {
     const data = await SalonOwner.find();
 
@@ -180,6 +181,7 @@ app.get("/api/data", async (req, res) => {
       location: owner.location,
       description: owner.description,
       profileImg: owner.profileImg,
+      email: owner.email
     }));
 
     res.status(200).json(salonDataArray);
@@ -334,6 +336,59 @@ app.post("/edit-profile", upload.single("profileImg"), async (req, res) => {
   //console.log("description inside edit : ",req.body.description);
 });
 // for fetching salon email based on name
+
+app.delete("/admin/delete", async (req,res) =>{
+  console.log("inside admin delete ")
+  const id = req.body.id;
+  console.log(id);
+  try{
+    const result = await SalonOwner.findByIdAndDelete(id);
+
+    if(result){
+      console.log("user deleted successfully");
+      res
+      .status(200)
+      .json({result: result, message: "user deleted successfully" });
+    }
+    else{
+      console.log("user could not be deleted");
+    }
+  
+
+  }catch(err)
+  {
+   console.log("Error in deletion : " , err);
+  }
+
+})
+
+app.patch("/admin/update", async (req,res) =>{
+  console.log("inside admin update ")
+  const id = req.body.currentEmail
+  const email = req.body.newEmail
+  console.log( "new email",email);
+  try{
+    const result = await SalonOwner.findOneAndUpdate(  { email: id },
+      { $set: { email: email } },
+      { new: true });
+
+    if(result){
+      console.log("user updated successfully");
+      res
+      .status(200)
+      .json({result: result, message: "user deleted successfully" });
+    }
+    else{
+      console.log("user could not be updated");
+    }
+  
+
+  }catch(err)
+  {
+   console.log("Error in updation : " , err);
+  }
+
+})
 
 app.get("/book/:salonName", async (req, res) => {
   console.log("Inside Booking ");
