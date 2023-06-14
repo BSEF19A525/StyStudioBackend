@@ -6,6 +6,7 @@ import Discount from "../components/Individual/Discount";
 import "../components/Individual/individual.css";
 import Bookandregister from "../components/Home/Bookandregister";
 const Individual = () => {
+
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
   }, []);

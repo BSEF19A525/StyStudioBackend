@@ -35,14 +35,24 @@ const SignUp = () => {
   };
 
   // for handling checkBox value
+  // const handleCheckBoxChange = (e) => {
+  //   const { value, checked } = e.target;
+  //   if (checked) {
+  //     setServices((prevServices) => [...prevServices, value]);
+  //   } else {
+  //     setServices((prevServices) =>
+  //       prevServices.filter((service) => service !== value)
+  //     );
+  //   }
+  // };
+
+  //kinza's code 
   const handleCheckBoxChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setServices((prevServices) => [...prevServices, value]);
+    const value = e.target.value;
+    if (services.includes(value)) {
+      setServices(services.filter((val) => val !== value));
     } else {
-      setServices((prevServices) =>
-        prevServices.filter((service) => service !== value)
-      );
+      setServices([...services, value]);
     }
   };
 
@@ -101,7 +111,7 @@ const SignUp = () => {
               location: "",
               description: "",
             });
-            setServices([]);
+             setServices([]);
             setProfileImg(null);
           }, 4000);
           setTimeout(() => {
@@ -209,6 +219,7 @@ const SignUp = () => {
                       type="checkbox"
                       name="service"
                       value="Haircut"
+                      checked={services.includes('Haircut')}
                       onChange={handleCheckBoxChange}
                     />
                     <span className="checkbox-label">Haircut</span>
@@ -218,6 +229,7 @@ const SignUp = () => {
                       type="checkbox"
                       name="service"
                       value="Manicure"
+                      checked={services.includes('Manicure')}
                       onChange={handleCheckBoxChange}
                     />
                     <span className="checkbox-label">Manicure</span>
@@ -227,6 +239,7 @@ const SignUp = () => {
                       type="checkbox"
                       name="service"
                       value="Facial"
+                      checked={services.includes('Facial')}
                       onChange={handleCheckBoxChange}
                     />
                     <span className="checkbox-label">Facial</span>
@@ -236,6 +249,7 @@ const SignUp = () => {
                       type="checkbox"
                       name="service"
                       value="Hair Style"
+                      checked={services.includes('Hair Style')}
                       onChange={handleCheckBoxChange}
                     />
                     <span className="checkbox-label">Hair Style</span>
@@ -245,6 +259,7 @@ const SignUp = () => {
                       type="checkbox"
                       name="service"
                       value="Bridal Makeup"
+                      checked={services.includes('Bridal Makeup')}
                       onChange={handleCheckBoxChange}
                     />
                     <span className="checkbox-label">Bridal Makeup</span>
