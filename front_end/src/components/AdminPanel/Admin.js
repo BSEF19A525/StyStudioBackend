@@ -1,18 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./admin.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Admin = () => {
   const navigate = useNavigate();
-  const salons = [
-    { id: 1, name: "Salon A", email: "salonA@example.com", location: "City A" },
-    { id: 2, name: "Salon B", email: "salonB@example.com", location: "City B" },
-    { id: 3, name: "Salon C", email: "salonC@example.com", location: "City C" },
-    { id: 4, name: "Salon D", email: "salonD@example.com", location: "City D" },
-    { id: 5, name: "Salon E", email: "salonE@example.com", location: "City E" },
-    // Add more salon data as needed
-  ];
+  const [data,setData] = useState([]);  
 
+  //to avoid page reload
+  const [updateResponse, setUpdateResponse] = useState(null);
+  const [deleteResponse, setDeleteResponse] = useState(null);
+
+
+    const fetchData = async () => {     
+      try {
+        const response = await axios.get("http://localhost:8000/api/data");
+        const result = response.data;
+        setData(result);
+        console.log(result);
+      } catch (error) {
+      console.log("fetchh error");
+      
+      }
+    };
+
+    const handleDeleteSalon = async (salonId) => {
+      // Handle delete salon functionality
+      console.log(`Delete salon with ID: ${salonId}`);
+      try {
+        const response = await axios.delete("http://localhost:8000/admin/delete" , {data:{id: salonId}});
+        if (response.status === 200) {
+          console.log("User deleted successfully");
+          setDeleteResponse(response);
+                }
+       else{
+        console.log("user could not be deleted");
+       } 
+      } catch (error) {
+      console.log("could not delete");
+      }
+    };
+
+   
+
+  
+  useEffect(() => {
+    fetchData();
+  }, [updateResponse,deleteResponse]);
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEmail, setCurrentEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
@@ -20,23 +55,34 @@ const Admin = () => {
   const handleUpdateEmail = (salonId) => {
     // Open the modal and set initial values
     setIsModalOpen(true);
-    setCurrentEmail(salons.find((salon) => salon.id === salonId).email);
-    setNewEmail("");
+    setCurrentEmail(data.find((salon) => salon._id === salonId).email);
+    console.log(newEmail);
+   
   };
 
-  const handleModalSubmit = (e) => {
+  const handleModalSubmit = async (e) => {
     e.preventDefault();
     // Perform the update email functionality here
     console.log("Current Email:", currentEmail);
     console.log("New Email:", newEmail);
+    try {
+      const response = await axios.patch("http://localhost:8000/admin/update" , {currentEmail: currentEmail , newEmail: newEmail});
+      if (response.status === 200) {
+        console.log("User updated successfully");
+        setUpdateResponse(response);
+
+      }
+     else{
+      console.log("user could not be updated");
+     } 
+    } catch (error) {
+    console.log("could not delete");
+    }
     // Close the modal
     setIsModalOpen(false);
   };
 
-  const handleDeleteSalon = (salonId) => {
-    // Handle delete salon functionality
-    console.log(`Delete salon with ID: ${salonId}`);
-  };
+ 
 
   return (
     <div className="admin-dashboard">
@@ -53,7 +99,7 @@ const Admin = () => {
       </div>
 
       {/* <div className="logout-btn"></div> */}
-
+      
       <div className="admin-table">
         <table>
           <thead>
@@ -66,24 +112,18 @@ const Admin = () => {
             </tr>
           </thead>
           <tbody>
-            {salons.map((salon) => (
-              <tr key={salon.id}>
-                <td>{salon.name}</td>
+            {data.map((salon) => (
+              <tr key={salon._id}>
+                <td>{salon.salonName}</td>
                 <td>{salon.email}</td>
                 <td>{salon.location}</td>
                 <td>
-                  <button
-                    className="admin-btn"
-                    onClick={() => handleUpdateEmail(salon.id)}
-                  >
+                  <button onClick={() => handleUpdateEmail(salon._id)}>
                     Update Email
                   </button>
                 </td>
                 <td>
-                  <button
-                    className="admin-btn"
-                    onClick={() => handleDeleteSalon(salon.id)}
-                  >
+                  <button onClick={() => handleDeleteSalon(salon._id)}>
                     Delete User
                   </button>
                 </td>
@@ -95,11 +135,11 @@ const Admin = () => {
       {isModalOpen && (
         <div className="modal">
           <form onSubmit={handleModalSubmit}>
-            <label className="admin-label">
+            <label>
               Current Email:
               <input type="email" value={currentEmail} disabled />
             </label>
-            <label className="admin-label">
+            <label>
               New Email:
               <input
                 type="email"
@@ -107,9 +147,7 @@ const Admin = () => {
                 onChange={(e) => setNewEmail(e.target.value)}
               />
             </label>
-            <button type="submit" className="admin-btn">
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </form>
         </div>
       )}
