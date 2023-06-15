@@ -20,7 +20,6 @@ const Profile = () => {
     setUser(userRes);
   }, []);
 
-
   const handleEditClick = () => {
     navigate("/edit-profile", {
       state: { user: userRes },
@@ -62,7 +61,7 @@ const Profile = () => {
         </div>
         {/* Service Section */}
         <div className="service-title">
-          <h1>Explore Our Services</h1>
+          <h1>Our Services</h1>
           <Services
             services={user.services}
             salonName={user.salon}
@@ -75,14 +74,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-{
-  /* <div className="svc">
-          {user.services?.map((item, index) => (
-            <div className="svc-name" key={index}>
-              {" "}
-              {item}{" "}
-            </div>
-          ))}
-        </div> */
-}

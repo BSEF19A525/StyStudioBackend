@@ -321,6 +321,9 @@ body {
     height: unset;
     overflow-y: unset;
   }
+  .service-title {
+    margin: unset;
+  }
 }
 @media (max-width: 576px) {
   .profile-outer {

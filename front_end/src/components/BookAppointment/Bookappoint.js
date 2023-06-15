@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,8 @@ function Bookappoint() {
     salName: "",
     salEmail: "",
   });
+
+  const navigate = useNavigate(null);
 
   const location = useLocation();
   const salonService = location.state?.salonService;
@@ -80,95 +82,6 @@ function Bookappoint() {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { fullName, phone, date, salonName, service } = bookData;
-
-  //   const bookingDate = validateDate(date);
-
-  //   // Phone Number Validity
-  //   if (phone.length < 12 && phone.length >= 9) {
-  //     // Date Validity --> No Past Date allowed
-  //     if (bookingDate !== -1) {
-  //       // Service Validity --> Only Alphabets, whitespace character, including spaces, tabs, and line breaks.
-  //       const alphabetsRegex = /^[A-Za-z\s]+$/;
-  //       if (alphabetsRegex.test(service)) {
-  //         try {
-  //           console.log("default: " + service);
-
-  //           // Make an API request to your backend server
-  //           const response = await axios.get(
-  //             `http://localhost:8000/book/${salonName}`
-  //           );
-  //           const data = response.data;
-
-  //           if (data) {
-  //             const { email, salonName } = data;
-  //             console.log("email: " + email);
-  //             console.log("salonName: " + salonName);
-  //             toast.loading("Loading...");
-  //             setTimeout(() => {
-  //               toast.dismiss();
-  //             }, 3000);
-  //             try {
-  //               // Send the email to the salon using EmailJS
-  //               const emailResponse = await emailjs.send(
-  //                 process.env.REACT_APP_EMAILJS_SERVICE_ID,
-  //                 process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-  //                 {
-  //                   salonName,
-  //                   salonEmail: email, // Salon's email address retrieved from the backend
-  //                   fullName,
-  //                   email: bookData.email,
-  //                   phone,
-  //                   date: bookingDate,
-  //                   service,
-  //                 },
-  //                 process.env.REACT_APP_EMAILJS_USER_ID
-  //               );
-
-  //               if (emailResponse.status === 200) {
-  //                 setBookData({
-  //                   fullName: "",
-  //                   email: "",
-  //                   phone: "",
-  //                   salonName: "",
-  //                   date: "",
-  //                   service: "",
-  //                 });
-  //                 setTimeout(() => {
-  //                   toast.success(`Booking request sent to salon`);
-  //                 }, 3000);
-  //               }
-  //               console.log(
-  //                 "Booking request sent to salon:",
-  //                 emailResponse.status,
-  //                 emailResponse.text
-  //               );
-  //             } catch (error) {
-  //               console.error("Error sending email to salon:", error);
-  //             }
-  //           }
-  //         } catch (error) {
-  //           console.error("Error retrieving salon data:", error.message);
-  //         }
-  //       } else {
-  //         toast.error("Accepting Alphabetic Characters Only");
-  //         setBookData({ ...bookData, service: "" });
-  //         serviceRef.current.focus();
-  //       }
-  //     } else {
-  //       toast.error("Choose Today or Future Date");
-  //       setBookData({ ...bookData, date: "" });
-  //       dateRef.current.focus();
-  //     }
-  //   } else {
-  //     toast.error("Phone numbers should contain 9 to 11 digits.");
-  //     setBookData({ ...bookData, phone: "" });
-  //     phoneRef.current.focus();
-  //   }
-  // };
-
   const handleBookingService = async (e) => {
     e.preventDefault();
     const { fullName, phone, date } = bookData;
@@ -185,8 +98,12 @@ function Bookappoint() {
           try {
             console.log("default: " + salService);
             console.log(salService);
-
             // Show loading toast
+
+            toast.loading("Loading...");
+            setTimeout(() => {
+              toast.dismiss();
+            }, 2000);
 
             // Send the email to the salon using EmailJS
             const emailResponse = await emailjs.send(
@@ -206,18 +123,26 @@ function Bookappoint() {
 
             if (emailResponse.status === 200) {
               // Clear form data and show success toast after 3 seconds
+              setTimeout(() => {
+                toast.success("Booking Successfull");
+              }, 2000);
+              // toast.dismiss();
+
               setBookData({
                 fullName: "",
                 email: "",
                 phone: "",
                 date: "",
+                service: "",
+                salonName: "",
               });
               setBookInfo({
                 salName: "", // Reset salon name to null
                 salService: "", // Reset salon service to null
+                salEmail: "",
               });
-              toast.success(`Booking request sent to salon`);
             }
+
             console.log(
               "Booking request sent to salon:",
               emailResponse.status,
@@ -228,6 +153,7 @@ function Bookappoint() {
           } finally {
             // Dismiss loading toast
             toast.dismiss();
+            // for moving back to navigate page
           }
         }
       } else {

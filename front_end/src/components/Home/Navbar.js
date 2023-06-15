@@ -13,7 +13,6 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 function Navbar() {
   const navigate = useNavigate(null);
 
-
   const cookies = new Cookies();
   const userName = cookies.get("user");
   console.log("Cookies: " + userName);
@@ -70,7 +69,7 @@ function Navbar() {
       // Move the user to the individual page
       // console.log("User authenticated");
       navigate("/individual", {
-        state: { user: authenticateResponse.data},
+        state: { user: authenticateResponse.data },
       });
       console.log(authenticateResponse);
     } else {
@@ -93,16 +92,16 @@ function Navbar() {
         navigate("/login");
         //not move to back btn(any other page) after logout
         const disableBackButton = () => {
-          window.history.pushState(null, '', window.location.pathname);
-          window.addEventListener('popstate', handleBackButtonPress);
+          window.history.pushState(null, "", window.location.pathname);
+          window.addEventListener("popstate", handleBackButtonPress);
         };
-      
+
         const handleBackButtonPress = () => {
-          window.history.pushState(null, '', window.location.pathname);
+          window.history.pushState(null, "", window.location.pathname);
         };
         disableBackButton();
         return () => {
-          window.removeEventListener('popstate', handleBackButtonPress);
+          window.removeEventListener("popstate", handleBackButtonPress);
         };
       } else {
         console.log("Logout failed");
